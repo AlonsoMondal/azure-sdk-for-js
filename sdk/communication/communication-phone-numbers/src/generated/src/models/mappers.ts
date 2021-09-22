@@ -167,11 +167,11 @@ export const PhoneNumberCost: coreHttp.CompositeMapper = {
         }
       },
       billingFrequency: {
-        defaultValue: "monthly",
-        isConstant: true,
         serializedName: "billingFrequency",
+        required: true,
         type: {
-          name: "String"
+          name: "Enum",
+          allowedValues: ["monthly", "once"]
         }
       }
     }
@@ -264,6 +264,19 @@ export const PhoneNumberOperation: coreHttp.CompositeMapper = {
     name: "Composite",
     className: "PhoneNumberOperation",
     modelProperties: {
+      operationType: {
+        serializedName: "operationType",
+        required: true,
+        type: {
+          name: "Enum",
+          allowedValues: [
+            "purchase",
+            "releasePhoneNumber",
+            "search",
+            "updatePhoneNumberCapabilities"
+          ]
+        }
+      },
       status: {
         serializedName: "status",
         required: true,
@@ -297,19 +310,6 @@ export const PhoneNumberOperation: coreHttp.CompositeMapper = {
         required: true,
         type: {
           name: "String"
-        }
-      },
-      operationType: {
-        serializedName: "operationType",
-        required: true,
-        type: {
-          name: "Enum",
-          allowedValues: [
-            "purchase",
-            "releasePhoneNumber",
-            "search",
-            "updatePhoneNumberCapabilities"
-          ]
         }
       },
       lastActionDateTime: {
@@ -427,6 +427,538 @@ export const PurchasedPhoneNumbers: coreHttp.CompositeMapper = {
             type: {
               name: "Composite",
               className: "PurchasedPhoneNumber"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ShortCodeEntities: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ShortCodeEntities",
+    modelProperties: {
+      shortCodes: {
+        serializedName: "shortCodes",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ShortCodeEntity"
+            }
+          }
+        }
+      },
+      nextLink: {
+        serializedName: "nextLink",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ShortCodeEntity: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ShortCodeEntity",
+    modelProperties: {
+      number: {
+        serializedName: "number",
+        type: {
+          name: "String"
+        }
+      },
+      numberType: {
+        serializedName: "numberType",
+        type: {
+          name: "Enum",
+          allowedValues: ["shortCode", "alphaId"]
+        }
+      },
+      countryCode: {
+        serializedName: "countryCode",
+        type: {
+          name: "String"
+        }
+      },
+      programBriefIds: {
+        serializedName: "programBriefIds",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      purchaseDate: {
+        serializedName: "purchaseDate",
+        type: {
+          name: "DateTime"
+        }
+      }
+    }
+  }
+};
+
+export const ProgramBriefEntity: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ProgramBriefEntity",
+    modelProperties: {
+      id: {
+        serializedName: "id",
+        required: true,
+        type: {
+          name: "Uuid"
+        }
+      },
+      status: {
+        serializedName: "status",
+        type: {
+          name: "Enum",
+          allowedValues: [
+            "submitted",
+            "approved",
+            "submitNewVanityNumbers",
+            "updateProgramBrief",
+            "draft"
+          ]
+        }
+      },
+      number: {
+        serializedName: "number",
+        type: {
+          name: "String"
+        }
+      },
+      notes: {
+        serializedName: "notes",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "Note"
+            }
+          }
+        }
+      },
+      costs: {
+        serializedName: "costs",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ShortCodeCost"
+            }
+          }
+        }
+      },
+      submissionDate: {
+        serializedName: "submissionDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      statusUpdatedDate: {
+        serializedName: "statusUpdatedDate",
+        type: {
+          name: "DateTime"
+        }
+      },
+      programDetails: {
+        serializedName: "programDetails",
+        type: {
+          name: "Composite",
+          className: "ProgramDetails"
+        }
+      },
+      companyInformation: {
+        serializedName: "companyInformation",
+        type: {
+          name: "Composite",
+          className: "CompanyInformation"
+        }
+      },
+      messageDetails: {
+        serializedName: "messageDetails",
+        type: {
+          name: "Composite",
+          className: "MessageDetails"
+        }
+      },
+      trafficDetails: {
+        serializedName: "trafficDetails",
+        type: {
+          name: "Composite",
+          className: "TrafficDetails"
+        }
+      }
+    }
+  }
+};
+
+export const Note: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "Note",
+    modelProperties: {
+      message: {
+        serializedName: "message",
+        type: {
+          name: "String"
+        }
+      },
+      date: {
+        serializedName: "date",
+        type: {
+          name: "DateTime"
+        }
+      }
+    }
+  }
+};
+
+export const ShortCodeCost: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ShortCodeCost",
+    modelProperties: {
+      amount: {
+        serializedName: "amount",
+        required: true,
+        type: {
+          name: "Number"
+        }
+      },
+      currencyCode: {
+        serializedName: "currencyCode",
+        required: true,
+        type: {
+          name: "String"
+        }
+      },
+      billingFrequency: {
+        serializedName: "billingFrequency",
+        required: true,
+        type: {
+          name: "Enum",
+          allowedValues: ["monthly", "once"]
+        }
+      }
+    }
+  }
+};
+
+export const ProgramDetails: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ProgramDetails",
+    modelProperties: {
+      isVanity: {
+        serializedName: "isVanity",
+        type: {
+          name: "Boolean"
+        }
+      },
+      preferredVanityNumbers: {
+        serializedName: "preferredVanityNumbers",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      numberType: {
+        serializedName: "numberType",
+        type: {
+          name: "Enum",
+          allowedValues: ["shortCode", "alphaId"]
+        }
+      },
+      isPoliticalCampaign: {
+        serializedName: "isPoliticalCampaign",
+        type: {
+          name: "Boolean"
+        }
+      },
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      description: {
+        serializedName: "description",
+        type: {
+          name: "String"
+        }
+      },
+      url: {
+        serializedName: "url",
+        type: {
+          name: "String"
+        }
+      },
+      signUpTypes: {
+        serializedName: "signUpTypes",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      signUp: {
+        serializedName: "signUp",
+        type: {
+          name: "String"
+        }
+      },
+      termsOfServiceUrl: {
+        serializedName: "termsOfServiceUrl",
+        type: {
+          name: "String"
+        }
+      },
+      privacyPolicyUrl: {
+        serializedName: "privacyPolicyUrl",
+        type: {
+          name: "String"
+        }
+      },
+      expectedDateOfService: {
+        serializedName: "expectedDateOfService",
+        type: {
+          name: "DateTime"
+        }
+      }
+    }
+  }
+};
+
+export const CompanyInformation: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CompanyInformation",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      url: {
+        serializedName: "url",
+        type: {
+          name: "String"
+        }
+      },
+      address: {
+        serializedName: "address",
+        type: {
+          name: "String"
+        }
+      },
+      contactInformation: {
+        serializedName: "contactInformation",
+        type: {
+          name: "Composite",
+          className: "ContactInformation"
+        }
+      },
+      customerCareInformation: {
+        serializedName: "customerCareInformation",
+        type: {
+          name: "Composite",
+          className: "CustomerCareInformation"
+        }
+      }
+    }
+  }
+};
+
+export const ContactInformation: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ContactInformation",
+    modelProperties: {
+      name: {
+        serializedName: "name",
+        type: {
+          name: "String"
+        }
+      },
+      phone: {
+        serializedName: "phone",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const CustomerCareInformation: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "CustomerCareInformation",
+    modelProperties: {
+      tollFreeNumber: {
+        serializedName: "tollFreeNumber",
+        type: {
+          name: "String"
+        }
+      },
+      email: {
+        serializedName: "email",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const MessageDetails: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "MessageDetails",
+    modelProperties: {
+      types: {
+        serializedName: "types",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      recurrence: {
+        serializedName: "recurrence",
+        type: {
+          name: "Enum",
+          allowedValues: ["subscription", "transaction"]
+        }
+      },
+      contentTypes: {
+        serializedName: "contentTypes",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "String"
+            }
+          }
+        }
+      },
+      optInMessage: {
+        serializedName: "optInMessage",
+        type: {
+          name: "String"
+        }
+      },
+      optInReply: {
+        serializedName: "optInReply",
+        type: {
+          name: "String"
+        }
+      },
+      confirmationMessage: {
+        serializedName: "confirmationMessage",
+        type: {
+          name: "String"
+        }
+      },
+      useCase: {
+        serializedName: "useCase",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const TrafficDetails: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "TrafficDetails",
+    modelProperties: {
+      estimatedVolume: {
+        serializedName: "estimatedVolume",
+        type: {
+          name: "Number"
+        }
+      },
+      monthlyAverageMessagesFromUser: {
+        serializedName: "monthlyAverageMessagesFromUser",
+        type: {
+          name: "Number"
+        }
+      },
+      monthlyAverageMessagesToUser: {
+        serializedName: "monthlyAverageMessagesToUser",
+        type: {
+          name: "Number"
+        }
+      },
+      isSpiky: {
+        serializedName: "isSpiky",
+        type: {
+          name: "Boolean"
+        }
+      },
+      spikeDetails: {
+        serializedName: "spikeDetails",
+        type: {
+          name: "String"
+        }
+      }
+    }
+  }
+};
+
+export const ProgramBriefEntities: coreHttp.CompositeMapper = {
+  type: {
+    name: "Composite",
+    className: "ProgramBriefEntities",
+    modelProperties: {
+      programBriefs: {
+        serializedName: "programBriefs",
+        type: {
+          name: "Sequence",
+          element: {
+            type: {
+              name: "Composite",
+              className: "ProgramBriefEntity"
             }
           }
         }
