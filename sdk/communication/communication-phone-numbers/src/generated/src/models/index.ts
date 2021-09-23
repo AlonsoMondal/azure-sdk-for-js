@@ -56,7 +56,7 @@ export interface PhoneNumberCost {
   /** The ISO 4217 currency code for the cost amount, e.g. USD. */
   currencyCode: string;
   /** The frequency with which the cost gets billed. */
-  billingFrequency: "monthly";
+  billingFrequency: BillingFrequency;
 }
 
 /** The Communication Services error. */
@@ -94,8 +94,9 @@ export interface PhoneNumberPurchaseRequest {
   searchId?: string;
 }
 
-/** Long running operation. */
 export interface PhoneNumberOperation {
+  /** The type of operation, e.g. Search */
+  operationType: PhoneNumberOperationType;
   /** Status of operation. */
   status: PhoneNumberOperationStatus;
   /** URL for retrieving the result of the operation, if any. */
@@ -106,8 +107,6 @@ export interface PhoneNumberOperation {
   error?: CommunicationError;
   /** Id of operation. */
   id: string;
-  /** The type of operation, e.g. Search */
-  operationType: PhoneNumberOperationType;
   /**
    * The most recent date that the operation was changed.
    * NOTE: This property will not be serialized. It can only be populated by the server.
@@ -131,7 +130,7 @@ export interface PurchasedPhoneNumber {
   phoneNumber: string;
   /** The ISO 3166-2 code of the phone number's country, e.g. US. */
   countryCode: string;
-  /** The phone number's type, e.g. Geographic, TollFree. */
+  /** The phone number's type, e.g. geographic, tollFree. */
   phoneNumberType: PhoneNumberType;
   /** Capabilities of a phone number. */
   capabilities: PhoneNumberCapabilities;
@@ -148,6 +147,189 @@ export interface PurchasedPhoneNumbers {
   /** Represents a list of phone numbers. */
   phoneNumbers: PurchasedPhoneNumber[];
   /** Represents the URL link to the next page of phone number results. */
+  nextLink?: string;
+}
+
+/** A wrapper for a list of short code entities. */
+export interface ShortCodeEntities {
+  /** List of short codes. */
+  shortCodes?: ShortCodeEntity[];
+  /** Represents the URL link to the next page */
+  nextLink?: string;
+}
+
+/** Represents a number, ShortCode or AlphaId, acquired in a given country. */
+export interface ShortCodeEntity {
+  /** The value of the ShortCode or the alpha numeric e.g. '555555', 'CONTOSO', etc. */
+  number?: string;
+  /** The type of number e.g. 'ShortCode', 'AlphaId'. */
+  numberType?: NumberType;
+  /** ISO 3166 2-char code representing the country e.g. 'US'. */
+  countryCode?: string;
+  /** Program Brief Name. */
+  programBriefIds?: string[];
+  /** Date in which number was purchased. */
+  purchaseDate?: Date;
+}
+
+/**
+ * A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.
+ * A Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.
+ */
+export interface ProgramBriefEntity {
+  /** Program Brief Id. */
+  id: string;
+  /** Program Brief status e.g. 'submitted', 'approved', etc */
+  status?: ProgramBriefStatus;
+  /** Number provisioned for the Program Brief e.g. 555555, 'CONTOSO' */
+  number?: string;
+  /**
+   * Notes added to the Program Brief after being reviewed to help customer understand
+   * review results and necessary follow up actions.
+   */
+  notes?: Note[];
+  /** Represents the costs tied to the number. */
+  costs?: ShortCodeCost[];
+  /** Date and time when the Program Brief was submitted. */
+  submissionDate?: Date;
+  /** Last date and time when the Program Brief status was updated. */
+  statusUpdatedDate?: Date;
+  programDetails?: ProgramDetails;
+  companyInformation?: CompanyInformation;
+  messageDetails?: MessageDetails;
+  trafficDetails?: TrafficDetails;
+}
+
+/** Holds a note about a Program Brief that has gone thru stages of review process. */
+export interface Note {
+  /** Note related to a Program Brief that may imply changes needed from the client. */
+  message?: string;
+  /** Date and time when the note was added to the Program Brief. */
+  date?: Date;
+}
+
+/** The incurred cost for a single short code. */
+export interface ShortCodeCost {
+  /** The cost amount. */
+  amount: number;
+  /** The ISO 4217 currency code for the cost amount, e.g. USD. */
+  currencyCode: string;
+  /** The frequency with which the cost gets billed. */
+  billingFrequency: BillingFrequency;
+}
+
+export interface ProgramDetails {
+  /** Set to true if the request is for a vanity number. */
+  isVanity?: boolean;
+  /**
+   * Priority ordered list of preferred vanity numbers.
+   * Vanity numbers should be 5 or 6 digit when number type is ShortCode.
+   * e.g. 555555, 222222.
+   */
+  preferredVanityNumbers?: string[];
+  /** Type for desired numbers e.g. 'shortCode' or 'alphaId'. */
+  numberType?: NumberType;
+  /** Indicates whether the number will be used for political campaigns or not. */
+  isPoliticalCampaign?: boolean;
+  /**
+   * A program name that indicates the purpose of filling the Program Brief and how the number will be used for messaging.
+   * e.g. 'CONTOSO Shipping'
+   */
+  name?: string;
+  /** Describes how and why the number will be used for messaging as part of the program. */
+  description?: string;
+  /** URL for the program or company. */
+  url?: string;
+  /** Indicates how the consumer can sign up to the program e.g. 'website', 'pointOfSale' and/or 'sms'. */
+  signUpTypes?: ProgramSignUpType[];
+  /**
+   * Call to action description for the program.
+   * e.g. 'This program will allow for consumers to receive a one-time passcode to validate their
+   * authenticity when making a purchase online.  Through a verification process, they will have an
+   * option to validate using a passcode sent via SMS, amongst the options. If they choose to have
+   * the passcode sent over SMS they will receive this one-time message.  If they chose to opt out,
+   * they may select \"STOP\" rather than continuing.'.
+   */
+  signUp?: string;
+  /** URL for program terms of service. */
+  termsOfServiceUrl?: string;
+  /** URL for privacy policy. */
+  privacyPolicyUrl?: string;
+  /**
+   * Date in which SMS messages will start to be sent out.
+   * Should follow ISO 8601 internet format for datetimes.
+   * e.g. 2021-08-17T22:02:51.316Z, 2021-08-17T16:39:57-08:00, etc.
+   */
+  expectedDateOfService?: Date;
+}
+
+export interface CompanyInformation {
+  /** Legal entity name for customer submitting Program Brief. */
+  name?: string;
+  /** Company URL for customer submitting Program Brief. */
+  url?: string;
+  /** Company's address for the customer submitting the Program Brief. */
+  address?: string;
+  /** Contact Information */
+  contactInformation?: ContactInformation;
+  /** Customer Care Information */
+  customerCareInformation?: CustomerCareInformation;
+}
+
+/** Contact Information */
+export interface ContactInformation {
+  /** Name of authorized user for purposes of submitting the Program Brief. */
+  name?: string;
+  /** Contact phone number for the authorized user for the customer. Use E164 format. e.g. +14086111111. */
+  phone?: string;
+  /** Contact email address number for the authorized user for the customer. */
+  email?: string;
+}
+
+/** Customer Care Information */
+export interface CustomerCareInformation {
+  /** Customer support phone number for the customer submitting the Program Brief. Use E164 format. e.g. +18005551212 */
+  tollFreeNumber?: string;
+  /** Customer support email address for the customer submitting the Program Brief. */
+  email?: string;
+}
+
+export interface MessageDetails {
+  /** Applicable message types used in the program e.g. SMS, MMS. */
+  types?: MessageType[];
+  /** Indicates the nature of the messaging associated with the program e.g. 'subscription', 'transaction'. */
+  recurrence?: Recurrence;
+  /** Indicates the messaging content types used in the program e.g. 'ringTones', 'smsChat', 'video', 'loyaltyProgramPointsPrizes', 'gifting', 'inApplicationBilling', 'textToScreen', etc. */
+  contentTypes?: ContentType[];
+  optInMessage?: string;
+  /** Keyword used to confirm double Opt-In method e.g. 'JOIN'. */
+  optInReply?: string;
+  confirmationMessage?: string;
+  /** Messaging use case description. */
+  useCase?: string;
+}
+
+export interface TrafficDetails {
+  /** Estimated total messages per month. */
+  estimatedVolume?: number;
+  /** Estimated number of Mobile-Originated messages likely to be received from a user per month. */
+  monthlyAverageMessagesFromUser?: number;
+  /** Estimated number of Mobile-Terminated messages likely to be sent per user per month. */
+  monthlyAverageMessagesToUser?: number;
+  /** Indicates if the nature of the messaging traffic will be bursty. */
+  isSpiky?: boolean;
+  /**
+   * If isSpiky=true, then explain additional details about the traffic pattern
+   * e.g. 'Higher traffic expected during holiday season and Black Friday.'.
+   */
+  spikeDetails?: string;
+}
+
+/** A wrapper for a list of ProgramBrief entities. */
+export interface ProgramBriefEntities {
+  /** List of Program ¨Briefs. */
+  programBriefs?: ProgramBriefEntity[];
+  /** Represents the URL link to the next page */
   nextLink?: string;
 }
 
@@ -201,6 +383,103 @@ export interface PhoneNumbersReleasePhoneNumberHeaders {
   releaseId?: string;
 }
 
+/** Known values of {@link ProgramSignUpType} that the service accepts. */
+export const enum KnownProgramSignUpType {
+  Website = "website",
+  PointOfSale = "pointOfSale",
+  Sms = "sms"
+}
+
+/**
+ * Defines values for ProgramSignUpType. \
+ * {@link KnownProgramSignUpType} can be used interchangeably with ProgramSignUpType,
+ *  this enum contains the known values that the service supports.
+ * ### Know values supported by the service
+ * **website** \
+ * **pointOfSale** \
+ * **sms**
+ */
+export type ProgramSignUpType = string;
+
+/** Known values of {@link MessageType} that the service accepts. */
+export const enum KnownMessageType {
+  Sms = "sms",
+  Mms = "mms"
+}
+
+/**
+ * Defines values for MessageType. \
+ * {@link KnownMessageType} can be used interchangeably with MessageType,
+ *  this enum contains the known values that the service supports.
+ * ### Know values supported by the service
+ * **sms** \
+ * **mms**
+ */
+export type MessageType = string;
+
+/** Known values of {@link ContentType} that the service accepts. */
+export const enum KnownContentType {
+  RingTones = "ringTones",
+  SmsChat = "smsChat",
+  Video = "video",
+  LoyaltyProgramPointsPrizes = "loyaltyProgramPointsPrizes",
+  Gifting = "gifting",
+  InApplicationBilling = "inApplicationBilling",
+  TextToScreen = "textToScreen",
+  Games = "games",
+  AudioChat = "audioChat",
+  MmsPictures = "mmsPictures",
+  SweepstakesContestAuction = "sweepstakesContestAuction",
+  FinancialBanking = "financialBanking",
+  PremiumWap = "premiumWap",
+  QueryService = "queryService",
+  WallpaperScreensaver = "wallpaperScreensaver",
+  Voting = "voting",
+  Application = "application",
+  MobileGivingDonations = "mobileGivingDonations",
+  Coupons = "coupons",
+  LoyaltyProgram = "loyaltyProgram",
+  NoPointPrizes = "noPointPrizes",
+  InformationAlerts = "informationAlerts",
+  MicroBilling = "microBilling",
+  Trivia = "trivia",
+  EntertainmentAlerts = "entertainmentAlerts",
+  Other = "other"
+}
+
+/**
+ * Defines values for ContentType. \
+ * {@link KnownContentType} can be used interchangeably with ContentType,
+ *  this enum contains the known values that the service supports.
+ * ### Know values supported by the service
+ * **ringTones** \
+ * **smsChat** \
+ * **video** \
+ * **loyaltyProgramPointsPrizes** \
+ * **gifting** \
+ * **inApplicationBilling** \
+ * **textToScreen** \
+ * **games** \
+ * **audioChat** \
+ * **mmsPictures** \
+ * **sweepstakesContestAuction** \
+ * **financialBanking** \
+ * **premiumWap** \
+ * **queryService** \
+ * **wallpaperScreensaver** \
+ * **voting** \
+ * **application** \
+ * **mobileGivingDonations** \
+ * **coupons** \
+ * **loyaltyProgram** \
+ * **noPointPrizes** \
+ * **informationAlerts** \
+ * **microBilling** \
+ * **trivia** \
+ * **entertainmentAlerts** \
+ * **other**
+ */
+export type ContentType = string;
 /** Defines values for PhoneNumberType. */
 export type PhoneNumberType = "geographic" | "tollFree";
 /** Defines values for PhoneNumberAssignmentType. */
@@ -211,18 +490,31 @@ export type PhoneNumberCapabilityType =
   | "inbound"
   | "outbound"
   | "inbound+outbound";
-/** Defines values for PhoneNumberOperationStatus. */
-export type PhoneNumberOperationStatus =
-  | "notStarted"
-  | "running"
-  | "succeeded"
-  | "failed";
+/** Defines values for BillingFrequency. */
+export type BillingFrequency = "monthly" | "once";
 /** Defines values for PhoneNumberOperationType. */
 export type PhoneNumberOperationType =
   | "purchase"
   | "releasePhoneNumber"
   | "search"
   | "updatePhoneNumberCapabilities";
+/** Defines values for PhoneNumberOperationStatus. */
+export type PhoneNumberOperationStatus =
+  | "notStarted"
+  | "running"
+  | "succeeded"
+  | "failed";
+/** Defines values for NumberType. */
+export type NumberType = "shortCode" | "alphaId";
+/** Defines values for ProgramBriefStatus. */
+export type ProgramBriefStatus =
+  | "submitted"
+  | "approved"
+  | "submitNewVanityNumbers"
+  | "updateProgramBrief"
+  | "draft";
+/** Defines values for Recurrence. */
+export type Recurrence = "subscription" | "transaction";
 
 /** Optional parameters. */
 export interface PhoneNumbersSearchAvailablePhoneNumbersOptionalParams
@@ -383,6 +675,133 @@ export type PhoneNumbersListPhoneNumbersNextResponse = PurchasedPhoneNumbers & {
 
     /** The response body as parsed JSON or XML */
     parsedBody: PurchasedPhoneNumbers;
+  };
+};
+
+/** Optional parameters. */
+export interface ShortCodesGetShortCodesOptionalParams
+  extends coreHttp.OperationOptions {
+  /** An optional parameter for how many entries to skip, for pagination purposes. */
+  skip?: number;
+  /** An optional parameter for how many entries to return, for pagination purposes. */
+  top?: number;
+}
+
+/** Contains response data for the getShortCodes operation. */
+export type ShortCodesGetShortCodesResponse = ShortCodeEntities & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ShortCodeEntities;
+  };
+};
+
+/** Optional parameters. */
+export interface ShortCodesUpsertUSProgramBriefOptionalParams
+  extends coreHttp.OperationOptions {
+  /** Data to create new a Program Brief or fields to update an existing Program Brief */
+  body?: ProgramBriefEntity;
+}
+
+/** Contains response data for the upsertUSProgramBrief operation. */
+export type ShortCodesUpsertUSProgramBriefResponse = ProgramBriefEntity & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ProgramBriefEntity;
+  };
+};
+
+/** Contains response data for the getUSProgramBrief operation. */
+export type ShortCodesGetUSProgramBriefResponse = ProgramBriefEntity & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ProgramBriefEntity;
+  };
+};
+
+/** Contains response data for the submitUSProgramBrief operation. */
+export type ShortCodesSubmitUSProgramBriefResponse = ProgramBriefEntity & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ProgramBriefEntity;
+  };
+};
+
+/** Optional parameters. */
+export interface ShortCodesGetUSProgramBriefsOptionalParams
+  extends coreHttp.OperationOptions {
+  /** An optional parameter for how many entries to skip, for pagination purposes. */
+  skip?: number;
+  /** An optional parameter for how many entries to return, for pagination purposes. */
+  top?: number;
+}
+
+/** Contains response data for the getUSProgramBriefs operation. */
+export type ShortCodesGetUSProgramBriefsResponse = ProgramBriefEntities & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ProgramBriefEntities;
+  };
+};
+
+/** Optional parameters. */
+export interface ShortCodesGetShortCodesNextOptionalParams
+  extends coreHttp.OperationOptions {
+  /** An optional parameter for how many entries to skip, for pagination purposes. */
+  skip?: number;
+  /** An optional parameter for how many entries to return, for pagination purposes. */
+  top?: number;
+}
+
+/** Contains response data for the getShortCodesNext operation. */
+export type ShortCodesGetShortCodesNextResponse = ShortCodeEntities & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ShortCodeEntities;
+  };
+};
+
+/** Optional parameters. */
+export interface ShortCodesGetUSProgramBriefsNextOptionalParams
+  extends coreHttp.OperationOptions {
+  /** An optional parameter for how many entries to skip, for pagination purposes. */
+  skip?: number;
+  /** An optional parameter for how many entries to return, for pagination purposes. */
+  top?: number;
+}
+
+/** Contains response data for the getUSProgramBriefsNext operation. */
+export type ShortCodesGetUSProgramBriefsNextResponse = ProgramBriefEntities & {
+  /** The underlying HTTP response. */
+  _response: coreHttp.HttpResponse & {
+    /** The response body as text (string format) */
+    bodyAsText: string;
+
+    /** The response body as parsed JSON or XML */
+    parsedBody: ProgramBriefEntities;
   };
 };
 

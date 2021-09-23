@@ -6,21 +6,22 @@
  * Changes may cause incorrect behavior and will be lost if the code is regenerated.
  */
 
-import { PhoneNumbers } from "./operations";
+import { PhoneNumbers, ShortCodes } from "./operations";
 import { PhoneNumbersClientContext } from "./phoneNumbersClientContext";
 import { PhoneNumbersClientOptionalParams } from "./models";
 
 export class PhoneNumbersClient extends PhoneNumbersClientContext {
   /**
    * Initializes a new instance of the PhoneNumbersClient class.
-   * @param endpoint The communication resource, for example
-   *                 https://resourcename.communication.azure.com.
+   * @param endpoint The communication resource, for example https://resourcename.communication.azure.com
    * @param options The parameter options
    */
   constructor(endpoint: string, options?: PhoneNumbersClientOptionalParams) {
     super(endpoint, options);
     this.phoneNumbers = new PhoneNumbers(this);
+    this.shortCodes = new ShortCodes(this);
   }
 
   phoneNumbers: PhoneNumbers;
+  shortCodes: ShortCodes;
 }
