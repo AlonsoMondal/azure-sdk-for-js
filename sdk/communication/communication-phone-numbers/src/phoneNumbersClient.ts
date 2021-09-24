@@ -11,10 +11,12 @@ import { isTokenCredential, KeyCredential, TokenCredential } from "@azure/core-a
 import {
   PipelineOptions,
   InternalPipelineOptions,
-  createPipelineFromOptions
+  createPipelineFromOptions,
+  RestResponse,
+  OperationOptions
 } from "@azure/core-http";
 import { PollerLike, PollOperationState } from "@azure/core-lro";
-import { PagedAsyncIterableIterator } from "@azure/core-paging";
+import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
 import { SpanStatusCode } from "@azure/core-tracing";
 import { logger, createSpan, SDK_VERSION } from "./utils";
 import { PhoneNumbersClient as PhoneNumbersGeneratedClient } from "./generated/src";
@@ -24,7 +26,11 @@ import {
   PurchasedPhoneNumber,
   PhoneNumberCapabilitiesRequest,
   PhoneNumberSearchResult,
-  ShortCodeEntity
+  ShortCodeEntity,
+  ShortCodesUpsertUSProgramBriefOptionalParams,
+  ShortCodesUpsertUSProgramBriefResponse,
+  ShortCodesGetUSProgramBriefsOptionalParams,
+  ProgramBriefEntity
 } from "./generated/src/models/";
 import {
   GetPurchasedPhoneNumberOptions,
@@ -32,7 +38,7 @@ import {
   SearchAvailablePhoneNumbersRequest,
   PurchasePhoneNumbersResult,
   ReleasePhoneNumberResult,
-  ListShortCodesOptions
+  ListShortCodesOptions,
 } from "./models";
 import {
   BeginPurchasePhoneNumbersOptions,
@@ -388,6 +394,70 @@ export class PhoneNumbersClient {
       options
     );
     const iter = this.shortCodesClient.listShortCodes(updatedOptions);
+    span.end();
+    return iter;
+  }
+
+  public async upsertUSProgramBrief(
+    programBriefId: string,
+    options: ShortCodesUpsertUSProgramBriefOptionalParams = {}
+  ): Promise<ShortCodesUpsertUSProgramBriefResponse> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-upsertUSProgramBrief",
+      options
+    );
+    const promise = await this.shortCodesClient.upsertUSProgramBrief(programBriefId, updatedOptions);
+    span.end();
+    return promise;
+  }
+
+  public async deleteUSProgramBrief(
+    programBriefId: string,
+    options: OperationOptions
+  ): Promise<RestResponse> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-deleteUSProgramBrief",
+      options
+    );
+    const promise = await this.shortCodesClient.deleteUSProgramBrief(programBriefId, updatedOptions);
+    span.end();
+    return promise;
+  }
+
+  public async getUSProgramBrief(
+    programBriefId: string,
+    options: OperationOptions
+  ): Promise<RestResponse> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-getUSProgramBrief",
+      options
+    );
+    const promise = await this.shortCodesClient.getUSProgramBrief(programBriefId, updatedOptions);
+    span.end();
+    return promise;
+  }
+
+  public async submitUSProgramBrief(
+    programBriefId: string,
+    options: OperationOptions
+  ): Promise<RestResponse> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-submitUSProgramBrief",
+      options
+    );
+    const promise = await this.shortCodesClient.submitUSProgramBrief(programBriefId, updatedOptions);
+    span.end();
+    return promise;
+  }
+
+  public listUSProgramBriefs(
+    options: ShortCodesGetUSProgramBriefsOptionalParams
+  ): PagedAsyncIterableIterator<ProgramBriefEntity> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-listUSProgramBriefs",
+      options
+    );
+    const iter = this.shortCodesClient.listUSProgramBriefs(updatedOptions)
     span.end();
     return iter;
   }

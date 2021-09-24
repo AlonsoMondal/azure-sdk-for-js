@@ -53,4 +53,5 @@ export {
   BillingFrequency,
   ShortCodeEntity,
   NumberType,
+  ShortCodesUpsertUSProgramBriefOptionalParams,
 } from "./generated/src/models/";
