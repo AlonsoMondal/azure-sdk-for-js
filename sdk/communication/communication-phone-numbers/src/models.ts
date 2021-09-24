@@ -7,12 +7,12 @@ import { PhoneNumberSearchRequest } from "./generated/src/models/";
 /**
  * The result of the phone numbers purchase operation.
  */
-export interface PurchasePhoneNumbersResult {}
+export interface PurchasePhoneNumbersResult { }
 
 /**
  * The result of the phone number release operation.
  */
-export interface ReleasePhoneNumberResult {}
+export interface ReleasePhoneNumberResult { }
 
 /**
  * Additional options for the get phone number request.
@@ -22,7 +22,12 @@ export type GetPurchasedPhoneNumberOptions = OperationOptions;
 /**
  * Additional options that can be passed to the list phone numbers request.
  */
-export interface ListPurchasedPhoneNumbersOptions extends OperationOptions {}
+export interface ListPurchasedPhoneNumbersOptions extends OperationOptions { }
+
+/**
+ * Additional options that can be passed to the list short codes request.
+ */
+export interface ListShortCodesOptions extends OperationOptions { }
 
 /**
  * Represents a phone number search request to find phone numbers.
@@ -44,5 +49,8 @@ export {
   PhoneNumberCost,
   PhoneNumberSearchResult,
   PhoneNumberSearchRequest,
-  PhoneNumberType
+  PhoneNumberType,
+  BillingFrequency,
+  ShortCodeEntity,
+  NumberType,
 } from "./generated/src/models/";

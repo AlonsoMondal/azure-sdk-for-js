@@ -14,7 +14,8 @@ import {
 import {
   PhoneNumberSearchRequest as PhoneNumberSearchRequestMapper,
   PhoneNumberPurchaseRequest as PhoneNumberPurchaseRequestMapper,
-  PhoneNumberCapabilitiesRequest as PhoneNumberCapabilitiesRequestMapper
+  PhoneNumberCapabilitiesRequest as PhoneNumberCapabilitiesRequestMapper,
+  ProgramBriefEntity as ProgramBriefEntityMapper
 } from "../models/mappers";
 
 export const contentType: OperationParameter = {
@@ -92,7 +93,7 @@ export const countryCode: OperationURLParameter = {
 export const apiVersion: OperationQueryParameter = {
   parameterPath: "apiVersion",
   mapper: {
-    defaultValue: "2021-03-07",
+    defaultValue: "2021-10-25-preview",
     isConstant: true,
     serializedName: "api-version",
     type: {
@@ -192,4 +193,20 @@ export const nextLink: OperationURLParameter = {
     }
   },
   skipEncoding: true
+};
+
+export const body3: OperationParameter = {
+  parameterPath: ["options", "body"],
+  mapper: ProgramBriefEntityMapper
+};
+
+export const programBriefId: OperationURLParameter = {
+  parameterPath: "programBriefId",
+  mapper: {
+    serializedName: "programBriefId",
+    required: true,
+    type: {
+      name: "Uuid"
+    }
+  }
 };

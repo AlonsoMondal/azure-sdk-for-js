@@ -19,17 +19,20 @@ import { SpanStatusCode } from "@azure/core-tracing";
 import { logger, createSpan, SDK_VERSION } from "./utils";
 import { PhoneNumbersClient as PhoneNumbersGeneratedClient } from "./generated/src";
 import { PhoneNumbers as GeneratedClient } from "./generated/src/operations";
+import { ShortCodes as ShortCodesGeneratedClient } from "./generated/src/operations";
 import {
   PurchasedPhoneNumber,
   PhoneNumberCapabilitiesRequest,
-  PhoneNumberSearchResult
+  PhoneNumberSearchResult,
+  ShortCodeEntity
 } from "./generated/src/models/";
 import {
   GetPurchasedPhoneNumberOptions,
   ListPurchasedPhoneNumbersOptions,
   SearchAvailablePhoneNumbersRequest,
   PurchasePhoneNumbersResult,
-  ReleasePhoneNumberResult
+  ReleasePhoneNumberResult,
+  ListShortCodesOptions
 } from "./models";
 import {
   BeginPurchasePhoneNumbersOptions,
@@ -41,7 +44,7 @@ import {
 /**
  * Client options used to configure the PhoneNumbersClient API requests.
  */
-export interface PhoneNumbersClientOptions extends PipelineOptions {}
+export interface PhoneNumbersClientOptions extends PipelineOptions { }
 
 const isPhoneNumbersClientOptions = (options: any): options is PhoneNumbersClientOptions =>
   options && !isKeyCredential(options) && !isTokenCredential(options);
@@ -54,6 +57,11 @@ export class PhoneNumbersClient {
    * A reference to the auto-generated PhoneNumber HTTP client.
    */
   private readonly client: GeneratedClient;
+
+  /**
+   * A reference to the auto-generated ShortCodes HTTP client.
+   */
+  private readonly shortCodesClient: ShortCodesGeneratedClient;
 
   /**
    * Initializes a new instance of the PhoneNumberAdministrationClient class using a connection string.
@@ -113,6 +121,7 @@ export class PhoneNumbersClient {
     const authPolicy = createCommunicationAuthPolicy(credential);
     const pipeline = createPipelineFromOptions(internalPipelineOptions, authPolicy);
     this.client = new PhoneNumbersGeneratedClient(url, pipeline).phoneNumbers;
+    this.shortCodesClient = new PhoneNumbersGeneratedClient(url, pipeline).shortCodes;
   }
 
   /**
@@ -355,5 +364,31 @@ export class PhoneNumbersClient {
     } finally {
       span.end();
     }
+  }
+
+  /**
+   * Iterates the purchased Short codes.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * for await (const shortcode of client.listShortCodes()) {
+   *   console.log("phone number: ", shortcodes.number);
+   * }
+   * ```
+   * List all purchased Short Codes.
+   * @param options 
+   * @returns 
+   */
+  public listShortCodes(
+    options: ListShortCodesOptions = {}
+  ): PagedAsyncIterableIterator<ShortCodeEntity> {
+    const { span, updatedOptions } = createSpan(
+      "ShortCodesClient-listShortCodes",
+      options
+    );
+    const iter = this.shortCodesClient.listShortCodes(updatedOptions);
+    span.end();
+    return iter;
   }
 }

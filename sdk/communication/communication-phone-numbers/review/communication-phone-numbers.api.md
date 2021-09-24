@@ -29,11 +29,21 @@ export interface BeginUpdatePhoneNumberCapabilitiesOptions extends OperationOpti
 }
 
 // @public
+export type BillingFrequency = "monthly" | "once";
+
+// @public
 export type GetPurchasedPhoneNumberOptions = OperationOptions;
 
 // @public
 export interface ListPurchasedPhoneNumbersOptions extends OperationOptions {
 }
+
+// @public
+export interface ListShortCodesOptions extends OperationOptions {
+}
+
+// @public
+export type NumberType = "shortCode" | "alphaId";
 
 // @public
 export type PhoneNumberAssignmentType = "person" | "application";
@@ -56,7 +66,7 @@ export type PhoneNumberCapabilityType = "none" | "inbound" | "outbound" | "inbou
 // @public
 export interface PhoneNumberCost {
     amount: number;
-    billingFrequency: "monthly";
+    billingFrequency: BillingFrequency;
     currencyCode: string;
 }
 
@@ -71,7 +81,8 @@ export class PhoneNumbersClient {
     beginUpdatePhoneNumberCapabilities(phoneNumber: string, request: PhoneNumberCapabilitiesRequest, options?: BeginUpdatePhoneNumberCapabilitiesOptions): Promise<PollerLike<PollOperationState<PurchasedPhoneNumber>, PurchasedPhoneNumber>>;
     getPurchasedPhoneNumber(phoneNumber: string, options?: GetPurchasedPhoneNumberOptions): Promise<PurchasedPhoneNumber>;
     listPurchasedPhoneNumbers(options?: ListPurchasedPhoneNumbersOptions): PagedAsyncIterableIterator<PurchasedPhoneNumber>;
-}
+    listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCodeEntity>;
+    }
 
 // @public
 export interface PhoneNumbersClientOptions extends PipelineOptions {
@@ -123,6 +134,15 @@ export interface ReleasePhoneNumberResult {
 // @public
 export interface SearchAvailablePhoneNumbersRequest extends PhoneNumberSearchRequest {
     countryCode: string;
+}
+
+// @public
+export interface ShortCodeEntity {
+    countryCode?: string;
+    number?: string;
+    numberType?: NumberType;
+    programBriefIds?: string[];
+    purchaseDate?: Date;
 }
 
 
