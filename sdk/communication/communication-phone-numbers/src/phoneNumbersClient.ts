@@ -16,7 +16,7 @@ import {
   OperationOptions
 } from "@azure/core-http";
 import { PollerLike, PollOperationState } from "@azure/core-lro";
-import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
+import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { SpanStatusCode } from "@azure/core-tracing";
 import { logger, createSpan, SDK_VERSION } from "./utils";
 import { PhoneNumbersClient as PhoneNumbersGeneratedClient } from "./generated/src";
@@ -398,6 +398,19 @@ export class PhoneNumbersClient {
     return iter;
   }
 
+  /**
+   * Creates or updates a Program Brief.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * const programbrief = client.upsertUSProgramBrief();
+   * console.log(programbrief);
+   * ```
+   * @param programBriefId 
+   * @param options 
+   * @returns 
+   */
   public async upsertUSProgramBrief(
     programBriefId: string,
     options: ShortCodesUpsertUSProgramBriefOptionalParams = {}
@@ -411,6 +424,20 @@ export class PhoneNumbersClient {
     return promise;
   }
 
+  /**
+   * Deletes a Program Brief.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * const response of client.deleteUSProgramBrief();
+   * console.log(response);
+   * ```
+   * 
+   * @param programBriefId 
+   * @param options 
+   * @returns 
+   */
   public async deleteUSProgramBrief(
     programBriefId: string,
     options: OperationOptions
@@ -424,6 +451,19 @@ export class PhoneNumbersClient {
     return promise;
   }
 
+  /**
+   * Gets a Program Brief.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * const programbrief of client.getUSProgramBrief();
+   * console.log("phone number: ", shortcodes.number);
+   * ```
+   * @param programBriefId 
+   * @param options 
+   * @returns 
+   */
   public async getUSProgramBrief(
     programBriefId: string,
     options: OperationOptions
@@ -437,6 +477,19 @@ export class PhoneNumbersClient {
     return promise;
   }
 
+  /**
+   * Submits a Program Brief to be reviewed for a Short Code approval.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * const result = client.submitUSProgramBrief());
+   * console.log(result);
+   * ```
+   * @param programBriefId
+   * @param options 
+   * @returns 
+   */
   public async submitUSProgramBrief(
     programBriefId: string,
     options: OperationOptions
@@ -450,6 +503,19 @@ export class PhoneNumbersClient {
     return promise;
   }
 
+  /**
+   * Lists all owned Program Briefs.
+   *
+   * Example usage:
+   * ```ts
+   * let client = new PhoneNumbersClient(credentials);
+   * for await (const programbrief of client.listUSProgramBriefs()) {
+   *   console.log("phone number: ", shortcodes.number);
+   * }
+   * ```
+   * @param options 
+   * @returns 
+   */
   public listUSProgramBriefs(
     options: ShortCodesGetUSProgramBriefsOptionalParams
   ): PagedAsyncIterableIterator<ProgramBriefEntity> {

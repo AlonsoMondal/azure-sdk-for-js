@@ -4,12 +4,14 @@
 
 ```ts
 
+import * as coreHttp from '@azure/core-http';
 import { KeyCredential } from '@azure/core-auth';
 import { OperationOptions } from '@azure/core-http';
 import { PagedAsyncIterableIterator } from '@azure/core-paging';
 import { PipelineOptions } from '@azure/core-http';
 import { PollerLike } from '@azure/core-lro';
 import { PollOperationState } from '@azure/core-lro';
+import { RestResponse } from '@azure/core-http';
 import { TokenCredential } from '@azure/core-auth';
 
 // @public
@@ -31,8 +33,107 @@ export interface BeginUpdatePhoneNumberCapabilitiesOptions extends OperationOpti
 // @public
 export type BillingFrequency = "monthly" | "once";
 
+// @public (undocumented)
+export interface CompanyInformation {
+    address?: string;
+    contactInformation?: ContactInformation;
+    customerCareInformation?: CustomerCareInformation;
+    name?: string;
+    url?: string;
+}
+
+// @public
+export interface ContactInformation {
+    email?: string;
+    name?: string;
+    phone?: string;
+}
+
+// @public
+export type ContentType = string;
+
+// @public
+export interface CustomerCareInformation {
+    email?: string;
+    tollFreeNumber?: string;
+}
+
 // @public
 export type GetPurchasedPhoneNumberOptions = OperationOptions;
+
+// @public
+export const enum KnownContentType {
+    // (undocumented)
+    Application = "application",
+    // (undocumented)
+    AudioChat = "audioChat",
+    // (undocumented)
+    Coupons = "coupons",
+    // (undocumented)
+    EntertainmentAlerts = "entertainmentAlerts",
+    // (undocumented)
+    FinancialBanking = "financialBanking",
+    // (undocumented)
+    Games = "games",
+    // (undocumented)
+    Gifting = "gifting",
+    // (undocumented)
+    InApplicationBilling = "inApplicationBilling",
+    // (undocumented)
+    InformationAlerts = "informationAlerts",
+    // (undocumented)
+    LoyaltyProgram = "loyaltyProgram",
+    // (undocumented)
+    LoyaltyProgramPointsPrizes = "loyaltyProgramPointsPrizes",
+    // (undocumented)
+    MicroBilling = "microBilling",
+    // (undocumented)
+    MmsPictures = "mmsPictures",
+    // (undocumented)
+    MobileGivingDonations = "mobileGivingDonations",
+    // (undocumented)
+    NoPointPrizes = "noPointPrizes",
+    // (undocumented)
+    Other = "other",
+    // (undocumented)
+    PremiumWap = "premiumWap",
+    // (undocumented)
+    QueryService = "queryService",
+    // (undocumented)
+    RingTones = "ringTones",
+    // (undocumented)
+    SmsChat = "smsChat",
+    // (undocumented)
+    SweepstakesContestAuction = "sweepstakesContestAuction",
+    // (undocumented)
+    TextToScreen = "textToScreen",
+    // (undocumented)
+    Trivia = "trivia",
+    // (undocumented)
+    Video = "video",
+    // (undocumented)
+    Voting = "voting",
+    // (undocumented)
+    WallpaperScreensaver = "wallpaperScreensaver"
+}
+
+// @public
+export const enum KnownMessageType {
+    // (undocumented)
+    Mms = "mms",
+    // (undocumented)
+    Sms = "sms"
+}
+
+// @public
+export const enum KnownProgramSignUpType {
+    // (undocumented)
+    PointOfSale = "pointOfSale",
+    // (undocumented)
+    Sms = "sms",
+    // (undocumented)
+    Website = "website"
+}
 
 // @public
 export interface ListPurchasedPhoneNumbersOptions extends OperationOptions {
@@ -40,6 +141,28 @@ export interface ListPurchasedPhoneNumbersOptions extends OperationOptions {
 
 // @public
 export interface ListShortCodesOptions extends OperationOptions {
+}
+
+// @public (undocumented)
+export interface MessageDetails {
+    // (undocumented)
+    confirmationMessage?: string;
+    contentTypes?: ContentType[];
+    // (undocumented)
+    optInMessage?: string;
+    optInReply?: string;
+    recurrence?: Recurrence;
+    types?: MessageType[];
+    useCase?: string;
+}
+
+// @public
+export type MessageType = string;
+
+// @public
+export interface Note {
+    date?: Date;
+    message?: string;
 }
 
 // @public
@@ -79,10 +202,15 @@ export class PhoneNumbersClient {
     beginReleasePhoneNumber(phoneNumber: string, options?: BeginReleasePhoneNumberOptions): Promise<PollerLike<PollOperationState<ReleasePhoneNumberResult>, ReleasePhoneNumberResult>>;
     beginSearchAvailablePhoneNumbers(search: SearchAvailablePhoneNumbersRequest, options?: BeginSearchAvailablePhoneNumbersOptions): Promise<PollerLike<PollOperationState<PhoneNumberSearchResult>, PhoneNumberSearchResult>>;
     beginUpdatePhoneNumberCapabilities(phoneNumber: string, request: PhoneNumberCapabilitiesRequest, options?: BeginUpdatePhoneNumberCapabilitiesOptions): Promise<PollerLike<PollOperationState<PurchasedPhoneNumber>, PurchasedPhoneNumber>>;
+    deleteUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
     getPurchasedPhoneNumber(phoneNumber: string, options?: GetPurchasedPhoneNumberOptions): Promise<PurchasedPhoneNumber>;
+    getUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
     listPurchasedPhoneNumbers(options?: ListPurchasedPhoneNumbersOptions): PagedAsyncIterableIterator<PurchasedPhoneNumber>;
     listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCodeEntity>;
-    }
+    listUSProgramBriefs(options: ShortCodesGetUSProgramBriefsOptionalParams): PagedAsyncIterableIterator<ProgramBriefEntity>;
+    submitUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
+    upsertUSProgramBrief(programBriefId: string, options?: ShortCodesUpsertUSProgramBriefOptionalParams): Promise<ShortCodesUpsertUSProgramBriefResponse>;
+}
 
 // @public
 export interface PhoneNumbersClientOptions extends PipelineOptions {
@@ -112,6 +240,47 @@ export interface PhoneNumberSearchResult {
 export type PhoneNumberType = "geographic" | "tollFree";
 
 // @public
+export interface ProgramBriefEntity {
+    // (undocumented)
+    companyInformation?: CompanyInformation;
+    costs?: ShortCodeCost[];
+    id: string;
+    // (undocumented)
+    messageDetails?: MessageDetails;
+    notes?: Note[];
+    number?: string;
+    // (undocumented)
+    programDetails?: ProgramDetails;
+    status?: ProgramBriefStatus;
+    statusUpdatedDate?: Date;
+    submissionDate?: Date;
+    // (undocumented)
+    trafficDetails?: TrafficDetails;
+}
+
+// @public
+export type ProgramBriefStatus = "submitted" | "approved" | "submitNewVanityNumbers" | "updateProgramBrief" | "draft";
+
+// @public (undocumented)
+export interface ProgramDetails {
+    description?: string;
+    expectedDateOfService?: Date;
+    isPoliticalCampaign?: boolean;
+    isVanity?: boolean;
+    name?: string;
+    numberType?: NumberType;
+    preferredVanityNumbers?: string[];
+    privacyPolicyUrl?: string;
+    signUp?: string;
+    signUpTypes?: ProgramSignUpType[];
+    termsOfServiceUrl?: string;
+    url?: string;
+}
+
+// @public
+export type ProgramSignUpType = string;
+
+// @public
 export interface PurchasedPhoneNumber {
     assignmentType: PhoneNumberAssignmentType;
     capabilities: PhoneNumberCapabilities;
@@ -128,6 +297,9 @@ export interface PurchasePhoneNumbersResult {
 }
 
 // @public
+export type Recurrence = "subscription" | "transaction";
+
+// @public
 export interface ReleasePhoneNumberResult {
 }
 
@@ -137,12 +309,47 @@ export interface SearchAvailablePhoneNumbersRequest extends PhoneNumberSearchReq
 }
 
 // @public
+export interface ShortCodeCost {
+    amount: number;
+    billingFrequency: BillingFrequency;
+    currencyCode: string;
+}
+
+// @public
 export interface ShortCodeEntity {
     countryCode?: string;
     number?: string;
     numberType?: NumberType;
     programBriefIds?: string[];
     purchaseDate?: Date;
+}
+
+// @public
+export interface ShortCodesGetUSProgramBriefsOptionalParams extends coreHttp.OperationOptions {
+    skip?: number;
+    top?: number;
+}
+
+// @public
+export interface ShortCodesUpsertUSProgramBriefOptionalParams extends coreHttp.OperationOptions {
+    body?: ProgramBriefEntity;
+}
+
+// @public
+export type ShortCodesUpsertUSProgramBriefResponse = ProgramBriefEntity & {
+    _response: coreHttp.HttpResponse & {
+        bodyAsText: string;
+        parsedBody: ProgramBriefEntity;
+    };
+};
+
+// @public (undocumented)
+export interface TrafficDetails {
+    estimatedVolume?: number;
+    isSpiky?: boolean;
+    monthlyAverageMessagesFromUser?: number;
+    monthlyAverageMessagesToUser?: number;
+    spikeDetails?: string;
 }
 
 
