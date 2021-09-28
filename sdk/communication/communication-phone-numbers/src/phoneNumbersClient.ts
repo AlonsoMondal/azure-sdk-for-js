@@ -26,7 +26,7 @@ import {
   PurchasedPhoneNumber,
   PhoneNumberCapabilitiesRequest,
   PhoneNumberSearchResult,
-  ShortCodeEntity,
+  ShortCodeEntity as ShortCode,
   ShortCodesUpsertUSProgramBriefOptionalParams,
   ShortCodesUpsertUSProgramBriefResponse,
   ShortCodesGetUSProgramBriefsOptionalParams,
@@ -388,7 +388,7 @@ export class PhoneNumbersClient {
    */
   public listShortCodes(
     options: ListShortCodesOptions = {}
-  ): PagedAsyncIterableIterator<ShortCodeEntity> {
+  ): PagedAsyncIterableIterator<ShortCode> {
     const { span, updatedOptions } = createSpan(
       "ShortCodesClient-listShortCodes",
       options
