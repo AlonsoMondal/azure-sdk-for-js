@@ -36,4 +36,10 @@ directive:
       if ($.modelAsString) {
         $.modelAsString = false
       }
+  - from: swagger-document
+    where: $.definitions[*].properties[*].items["x-ms-enum"]
+    transform: >
+      if ($.modelAsString) {
+        $.modelAsString = false
+      }
 ```
