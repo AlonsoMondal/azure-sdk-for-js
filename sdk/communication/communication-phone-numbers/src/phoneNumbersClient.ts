@@ -26,9 +26,9 @@ import {
   PurchasedPhoneNumber,
   PhoneNumberCapabilitiesRequest,
   PhoneNumberSearchResult,
-  ShortCodeEntity as ShortCode,
+  ShortCode,
   ShortCodesUpsertUSProgramBriefOptionalParams,
-  ProgramBriefEntity
+  USProgramBrief
 } from "./generated/src/models/";
 import {
   GetPurchasedPhoneNumberOptions,
@@ -514,7 +514,7 @@ export class PhoneNumbersClient {
    * @param options 
    * @returns 
    */
-  public listUSProgramBriefs(): PagedAsyncIterableIterator<ProgramBriefEntity> {
+  public listUSProgramBriefs(): PagedAsyncIterableIterator<USProgramBrief> {
     const { span, updatedOptions } = createSpan(
       "ShortCodesClient-listUSProgramBriefs",
       undefined

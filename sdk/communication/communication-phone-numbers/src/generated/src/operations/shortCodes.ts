@@ -12,10 +12,10 @@ import * as Mappers from "../models/mappers";
 import * as Parameters from "../models/parameters";
 import { PhoneNumbersClientContext } from "../phoneNumbersClientContext";
 import {
-  ShortCodeEntity,
+  ShortCode,
   ShortCodesGetShortCodesNextOptionalParams,
   ShortCodesGetShortCodesOptionalParams,
-  ProgramBriefEntity,
+  USProgramBrief,
   ShortCodesGetUSProgramBriefsNextOptionalParams,
   ShortCodesGetUSProgramBriefsOptionalParams,
   ShortCodesGetShortCodesResponse,
@@ -46,7 +46,7 @@ export class ShortCodes {
    */
   public listShortCodes(
     options?: ShortCodesGetShortCodesOptionalParams
-  ): PagedAsyncIterableIterator<ShortCodeEntity> {
+  ): PagedAsyncIterableIterator<ShortCode> {
     const iter = this.getShortCodesPagingAll(options);
     return {
       next() {
@@ -63,7 +63,7 @@ export class ShortCodes {
 
   private async *getShortCodesPagingPage(
     options?: ShortCodesGetShortCodesOptionalParams
-  ): AsyncIterableIterator<ShortCodeEntity[]> {
+  ): AsyncIterableIterator<ShortCode[]> {
     let result = await this._getShortCodes(options);
     yield result.shortCodes || [];
     let continuationToken = result.nextLink;
@@ -76,7 +76,7 @@ export class ShortCodes {
 
   private async *getShortCodesPagingAll(
     options?: ShortCodesGetShortCodesOptionalParams
-  ): AsyncIterableIterator<ShortCodeEntity> {
+  ): AsyncIterableIterator<ShortCode> {
     for await (const page of this.getShortCodesPagingPage(options)) {
       yield* page;
     }
@@ -88,7 +88,7 @@ export class ShortCodes {
    */
   public listUSProgramBriefs(
     options?: ShortCodesGetUSProgramBriefsOptionalParams
-  ): PagedAsyncIterableIterator<ProgramBriefEntity> {
+  ): PagedAsyncIterableIterator<USProgramBrief> {
     const iter = this.getUSProgramBriefsPagingAll(options);
     return {
       next() {
@@ -105,7 +105,7 @@ export class ShortCodes {
 
   private async *getUSProgramBriefsPagingPage(
     options?: ShortCodesGetUSProgramBriefsOptionalParams
-  ): AsyncIterableIterator<ProgramBriefEntity[]> {
+  ): AsyncIterableIterator<USProgramBrief[]> {
     let result = await this._getUSProgramBriefs(options);
     yield result.programBriefs || [];
     let continuationToken = result.nextLink;
@@ -118,7 +118,7 @@ export class ShortCodes {
 
   private async *getUSProgramBriefsPagingAll(
     options?: ShortCodesGetUSProgramBriefsOptionalParams
-  ): AsyncIterableIterator<ProgramBriefEntity> {
+  ): AsyncIterableIterator<USProgramBrief> {
     for await (const page of this.getUSProgramBriefsPagingPage(options)) {
       yield* page;
     }
@@ -276,7 +276,7 @@ const getShortCodesOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ShortCodeEntities
+      bodyMapper: Mappers.ShortCodes
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -292,10 +292,10 @@ const upsertUSProgramBriefOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "PATCH",
   responses: {
     200: {
-      bodyMapper: Mappers.ProgramBriefEntity
+      bodyMapper: Mappers.USProgramBrief
     },
     201: {
-      bodyMapper: Mappers.ProgramBriefEntity
+      bodyMapper: Mappers.USProgramBrief
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -327,7 +327,7 @@ const getUSProgramBriefOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ProgramBriefEntity
+      bodyMapper: Mappers.USProgramBrief
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -343,7 +343,7 @@ const submitUSProgramBriefOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "POST",
   responses: {
     200: {
-      bodyMapper: Mappers.ProgramBriefEntity
+      bodyMapper: Mappers.USProgramBrief
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -359,7 +359,7 @@ const getUSProgramBriefsOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ProgramBriefEntities
+      bodyMapper: Mappers.USProgramBriefs
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -375,7 +375,7 @@ const getShortCodesNextOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ShortCodeEntities
+      bodyMapper: Mappers.ShortCodes
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse
@@ -391,7 +391,7 @@ const getUSProgramBriefsNextOperationSpec: coreHttp.OperationSpec = {
   httpMethod: "GET",
   responses: {
     200: {
-      bodyMapper: Mappers.ProgramBriefEntities
+      bodyMapper: Mappers.USProgramBriefs
     },
     default: {
       bodyMapper: Mappers.CommunicationErrorResponse

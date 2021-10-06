@@ -15,7 +15,7 @@ import {
   PhoneNumberSearchRequest as PhoneNumberSearchRequestMapper,
   PhoneNumberPurchaseRequest as PhoneNumberPurchaseRequestMapper,
   PhoneNumberCapabilitiesRequest as PhoneNumberCapabilitiesRequestMapper,
-  ProgramBriefEntity as ProgramBriefEntityMapper
+  USProgramBrief as USProgramBriefMapper
 } from "../models/mappers";
 
 export const contentType: OperationParameter = {
@@ -197,7 +197,7 @@ export const nextLink: OperationURLParameter = {
 
 export const body3: OperationParameter = {
   parameterPath: ["options", "body"],
-  mapper: ProgramBriefEntityMapper
+  mapper: USProgramBriefMapper
 };
 
 export const programBriefId: OperationURLParameter = {

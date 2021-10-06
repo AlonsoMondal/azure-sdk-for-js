@@ -441,10 +441,10 @@ export const PurchasedPhoneNumbers: coreHttp.CompositeMapper = {
   }
 };
 
-export const ShortCodeEntities: coreHttp.CompositeMapper = {
+export const ShortCodes: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "ShortCodeEntities",
+    className: "ShortCodes",
     modelProperties: {
       shortCodes: {
         serializedName: "shortCodes",
@@ -453,7 +453,7 @@ export const ShortCodeEntities: coreHttp.CompositeMapper = {
           element: {
             type: {
               name: "Composite",
-              className: "ShortCodeEntity"
+              className: "ShortCode"
             }
           }
         }
@@ -468,10 +468,10 @@ export const ShortCodeEntities: coreHttp.CompositeMapper = {
   }
 };
 
-export const ShortCodeEntity: coreHttp.CompositeMapper = {
+export const ShortCode: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "ShortCodeEntity",
+    className: "ShortCode",
     modelProperties: {
       number: {
         serializedName: "number",
@@ -513,10 +513,10 @@ export const ShortCodeEntity: coreHttp.CompositeMapper = {
   }
 };
 
-export const ProgramBriefEntity: coreHttp.CompositeMapper = {
+export const USProgramBrief: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "ProgramBriefEntity",
+    className: "USProgramBrief",
     modelProperties: {
       id: {
         serializedName: "id",
@@ -947,10 +947,10 @@ export const TrafficDetails: coreHttp.CompositeMapper = {
   }
 };
 
-export const ProgramBriefEntities: coreHttp.CompositeMapper = {
+export const USProgramBriefs: coreHttp.CompositeMapper = {
   type: {
     name: "Composite",
-    className: "ProgramBriefEntities",
+    className: "USProgramBriefs",
     modelProperties: {
       programBriefs: {
         serializedName: "programBriefs",
@@ -959,7 +959,7 @@ export const ProgramBriefEntities: coreHttp.CompositeMapper = {
           element: {
             type: {
               name: "Composite",
-              className: "ProgramBriefEntity"
+              className: "USProgramBrief"
             }
           }
         }

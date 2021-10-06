@@ -151,15 +151,15 @@ export interface PurchasedPhoneNumbers {
 }
 
 /** A wrapper for a list of short code entities. */
-export interface ShortCodeEntities {
+export interface ShortCodes {
   /** List of short codes. */
-  shortCodes?: ShortCodeEntity[];
+  shortCodes?: ShortCode[];
   /** Represents the URL link to the next page */
   nextLink?: string;
 }
 
 /** Represents a number, ShortCode or AlphaId, acquired in a given country. */
-export interface ShortCodeEntity {
+export interface ShortCode {
   /** The value of the ShortCode or the alpha numeric e.g. '555555', 'CONTOSO', etc. */
   number?: string;
   /** The type of number e.g. 'ShortCode', 'AlphaId'. */
@@ -173,10 +173,11 @@ export interface ShortCodeEntity {
 }
 
 /**
- * A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number in a given country.
+ * Represents a US Program Brief for acquiring a short code in the United States.
+ * A Program Brief provides vital information to the carriers about a messaging program or campaign that would be associated with a short code or alpha sender number.
  * A Program Brief also provides specifics about the use case, the purpose and the consumer experience receiving the message.
  */
-export interface ProgramBriefEntity {
+export interface USProgramBrief {
   /** Program Brief Id. */
   id: string;
   /** Program Brief status e.g. 'submitted', 'approved', etc */
@@ -325,11 +326,11 @@ export interface TrafficDetails {
   spikeDetails?: string;
 }
 
-/** A wrapper for a list of ProgramBrief entities. */
-export interface ProgramBriefEntities {
-  /** List of Program ¨Briefs. */
-  programBriefs?: ProgramBriefEntity[];
-  /** Represents the URL link to the next page */
+/** A wrapper for a list of USProgramBrief entities. */
+export interface USProgramBriefs {
+  /** List of Program Briefs. */
+  programBriefs?: USProgramBrief[];
+  /** Represents the URL link to the next page. */
   nextLink?: string;
 }
 
@@ -689,14 +690,14 @@ export interface ShortCodesGetShortCodesOptionalParams
 }
 
 /** Contains response data for the getShortCodes operation. */
-export type ShortCodesGetShortCodesResponse = ShortCodeEntities & {
+export type ShortCodesGetShortCodesResponse = ShortCodes & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ShortCodeEntities;
+    parsedBody: ShortCodes;
   };
 };
 
@@ -704,42 +705,42 @@ export type ShortCodesGetShortCodesResponse = ShortCodeEntities & {
 export interface ShortCodesUpsertUSProgramBriefOptionalParams
   extends coreHttp.OperationOptions {
   /** Data to create new a Program Brief or fields to update an existing Program Brief */
-  body?: ProgramBriefEntity;
+  body?: USProgramBrief;
 }
 
 /** Contains response data for the upsertUSProgramBrief operation. */
-export type ShortCodesUpsertUSProgramBriefResponse = ProgramBriefEntity & {
+export type ShortCodesUpsertUSProgramBriefResponse = USProgramBrief & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ProgramBriefEntity;
+    parsedBody: USProgramBrief;
   };
 };
 
 /** Contains response data for the getUSProgramBrief operation. */
-export type ShortCodesGetUSProgramBriefResponse = ProgramBriefEntity & {
+export type ShortCodesGetUSProgramBriefResponse = USProgramBrief & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ProgramBriefEntity;
+    parsedBody: USProgramBrief;
   };
 };
 
 /** Contains response data for the submitUSProgramBrief operation. */
-export type ShortCodesSubmitUSProgramBriefResponse = ProgramBriefEntity & {
+export type ShortCodesSubmitUSProgramBriefResponse = USProgramBrief & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ProgramBriefEntity;
+    parsedBody: USProgramBrief;
   };
 };
 
@@ -753,14 +754,14 @@ export interface ShortCodesGetUSProgramBriefsOptionalParams
 }
 
 /** Contains response data for the getUSProgramBriefs operation. */
-export type ShortCodesGetUSProgramBriefsResponse = ProgramBriefEntities & {
+export type ShortCodesGetUSProgramBriefsResponse = USProgramBriefs & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ProgramBriefEntities;
+    parsedBody: USProgramBriefs;
   };
 };
 
@@ -774,14 +775,14 @@ export interface ShortCodesGetShortCodesNextOptionalParams
 }
 
 /** Contains response data for the getShortCodesNext operation. */
-export type ShortCodesGetShortCodesNextResponse = ShortCodeEntities & {
+export type ShortCodesGetShortCodesNextResponse = ShortCodes & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ShortCodeEntities;
+    parsedBody: ShortCodes;
   };
 };
 
@@ -795,14 +796,14 @@ export interface ShortCodesGetUSProgramBriefsNextOptionalParams
 }
 
 /** Contains response data for the getUSProgramBriefsNext operation. */
-export type ShortCodesGetUSProgramBriefsNextResponse = ProgramBriefEntities & {
+export type ShortCodesGetUSProgramBriefsNextResponse = USProgramBriefs & {
   /** The underlying HTTP response. */
   _response: coreHttp.HttpResponse & {
     /** The response body as text (string format) */
     bodyAsText: string;
 
     /** The response body as parsed JSON or XML */
-    parsedBody: ProgramBriefEntities;
+    parsedBody: USProgramBriefs;
   };
 };
 
