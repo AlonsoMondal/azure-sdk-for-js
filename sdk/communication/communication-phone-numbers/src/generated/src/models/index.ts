@@ -439,8 +439,8 @@ export const enum KnownContentType {
   MobileGivingDonations = "mobileGivingDonations",
   Coupons = "coupons",
   LoyaltyProgram = "loyaltyProgram",
-  NoPointPrizes = "noPointPrizes",
-  InformationAlerts = "informationAlerts",
+  NoPointsPrizes = "noPointsPrizes",
+  InformationalAlerts = "informationalAlerts",
   MicroBilling = "microBilling",
   Trivia = "trivia",
   EntertainmentAlerts = "entertainmentAlerts",
@@ -472,8 +472,8 @@ export const enum KnownContentType {
  * **mobileGivingDonations** \
  * **coupons** \
  * **loyaltyProgram** \
- * **noPointPrizes** \
- * **informationAlerts** \
+ * **noPointsPrizes** \
+ * **informationalAlerts** \
  * **microBilling** \
  * **trivia** \
  * **entertainmentAlerts** \
@@ -512,7 +512,8 @@ export type ProgramBriefStatus =
   | "approved"
   | "submitNewVanityNumbers"
   | "updateProgramBrief"
-  | "draft";
+  | "draft"
+  | "denied";
 /** Defines values for Recurrence. */
 export type Recurrence = "subscription" | "transaction";
 

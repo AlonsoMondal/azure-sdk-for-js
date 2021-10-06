@@ -534,7 +534,8 @@ export const ProgramBriefEntity: coreHttp.CompositeMapper = {
             "approved",
             "submitNewVanityNumbers",
             "updateProgramBrief",
-            "draft"
+            "draft",
+            "denied"
           ]
         }
       },

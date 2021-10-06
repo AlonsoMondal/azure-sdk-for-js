@@ -80,7 +80,7 @@ export const enum KnownContentType {
     // (undocumented)
     InApplicationBilling = "inApplicationBilling",
     // (undocumented)
-    InformationAlerts = "informationAlerts",
+    InformationalAlerts = "informationalAlerts",
     // (undocumented)
     LoyaltyProgram = "loyaltyProgram",
     // (undocumented)
@@ -92,7 +92,7 @@ export const enum KnownContentType {
     // (undocumented)
     MobileGivingDonations = "mobileGivingDonations",
     // (undocumented)
-    NoPointPrizes = "noPointPrizes",
+    NoPointsPrizes = "noPointsPrizes",
     // (undocumented)
     Other = "other",
     // (undocumented)
@@ -206,10 +206,10 @@ export class PhoneNumbersClient {
     getPurchasedPhoneNumber(phoneNumber: string, options?: GetPurchasedPhoneNumberOptions): Promise<PurchasedPhoneNumber>;
     getUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
     listPurchasedPhoneNumbers(options?: ListPurchasedPhoneNumbersOptions): PagedAsyncIterableIterator<PurchasedPhoneNumber>;
-    listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCodeEntity>;
-    listUSProgramBriefs(options: ShortCodesGetUSProgramBriefsOptionalParams): PagedAsyncIterableIterator<ProgramBriefEntity>;
+    listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCode>;
+    listUSProgramBriefs(): PagedAsyncIterableIterator<USProgramBrief>;
     submitUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
-    upsertUSProgramBrief(programBriefId: string, options?: ShortCodesUpsertUSProgramBriefOptionalParams): Promise<ShortCodesUpsertUSProgramBriefResponse>;
+    upsertUSProgramBrief(programBriefId: string, options?: ShortCodesUpsertUSProgramBriefOptionalParams): Promise<RestResponse>;
 }
 
 // @public
@@ -240,26 +240,7 @@ export interface PhoneNumberSearchResult {
 export type PhoneNumberType = "geographic" | "tollFree";
 
 // @public
-export interface ProgramBriefEntity {
-    // (undocumented)
-    companyInformation?: CompanyInformation;
-    costs?: ShortCodeCost[];
-    id: string;
-    // (undocumented)
-    messageDetails?: MessageDetails;
-    notes?: Note[];
-    number?: string;
-    // (undocumented)
-    programDetails?: ProgramDetails;
-    status?: ProgramBriefStatus;
-    statusUpdatedDate?: Date;
-    submissionDate?: Date;
-    // (undocumented)
-    trafficDetails?: TrafficDetails;
-}
-
-// @public
-export type ProgramBriefStatus = "submitted" | "approved" | "submitNewVanityNumbers" | "updateProgramBrief" | "draft";
+export type ProgramBriefStatus = "submitted" | "approved" | "submitNewVanityNumbers" | "updateProgramBrief" | "draft" | "denied";
 
 // @public (undocumented)
 export interface ProgramDetails {
@@ -309,14 +290,7 @@ export interface SearchAvailablePhoneNumbersRequest extends PhoneNumberSearchReq
 }
 
 // @public
-export interface ShortCodeCost {
-    amount: number;
-    billingFrequency: BillingFrequency;
-    currencyCode: string;
-}
-
-// @public
-export interface ShortCodeEntity {
+export interface ShortCode {
     countryCode?: string;
     number?: string;
     numberType?: NumberType;
@@ -325,23 +299,16 @@ export interface ShortCodeEntity {
 }
 
 // @public
-export interface ShortCodesGetUSProgramBriefsOptionalParams extends coreHttp.OperationOptions {
-    skip?: number;
-    top?: number;
+export interface ShortCodeCost {
+    amount: number;
+    billingFrequency: BillingFrequency;
+    currencyCode: string;
 }
 
 // @public
 export interface ShortCodesUpsertUSProgramBriefOptionalParams extends coreHttp.OperationOptions {
-    body?: ProgramBriefEntity;
+    body?: USProgramBrief;
 }
-
-// @public
-export type ShortCodesUpsertUSProgramBriefResponse = ProgramBriefEntity & {
-    _response: coreHttp.HttpResponse & {
-        bodyAsText: string;
-        parsedBody: ProgramBriefEntity;
-    };
-};
 
 // @public (undocumented)
 export interface TrafficDetails {
@@ -350,6 +317,25 @@ export interface TrafficDetails {
     monthlyAverageMessagesFromUser?: number;
     monthlyAverageMessagesToUser?: number;
     spikeDetails?: string;
+}
+
+// @public
+export interface USProgramBrief {
+    // (undocumented)
+    companyInformation?: CompanyInformation;
+    costs?: ShortCodeCost[];
+    id: string;
+    // (undocumented)
+    messageDetails?: MessageDetails;
+    notes?: Note[];
+    number?: string;
+    // (undocumented)
+    programDetails?: ProgramDetails;
+    status?: ProgramBriefStatus;
+    statusUpdatedDate?: Date;
+    submissionDate?: Date;
+    // (undocumented)
+    trafficDetails?: TrafficDetails;
 }
 
 

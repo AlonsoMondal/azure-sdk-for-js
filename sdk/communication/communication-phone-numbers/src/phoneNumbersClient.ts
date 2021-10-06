@@ -28,8 +28,6 @@ import {
   PhoneNumberSearchResult,
   ShortCodeEntity as ShortCode,
   ShortCodesUpsertUSProgramBriefOptionalParams,
-  ShortCodesUpsertUSProgramBriefResponse,
-  ShortCodesGetUSProgramBriefsOptionalParams,
   ProgramBriefEntity
 } from "./generated/src/models/";
 import {
@@ -414,7 +412,7 @@ export class PhoneNumbersClient {
   public async upsertUSProgramBrief(
     programBriefId: string,
     options: ShortCodesUpsertUSProgramBriefOptionalParams = {}
-  ): Promise<ShortCodesUpsertUSProgramBriefResponse> {
+  ): Promise<RestResponse> {
     const { span, updatedOptions } = createSpan(
       "ShortCodesClient-upsertUSProgramBrief",
       options
@@ -516,12 +514,10 @@ export class PhoneNumbersClient {
    * @param options 
    * @returns 
    */
-  public listUSProgramBriefs(
-    options: ShortCodesGetUSProgramBriefsOptionalParams
-  ): PagedAsyncIterableIterator<ProgramBriefEntity> {
+  public listUSProgramBriefs(): PagedAsyncIterableIterator<ProgramBriefEntity> {
     const { span, updatedOptions } = createSpan(
       "ShortCodesClient-listUSProgramBriefs",
-      options
+      undefined
     );
     const iter = this.shortCodesClient.listUSProgramBriefs(updatedOptions)
     span.end();
