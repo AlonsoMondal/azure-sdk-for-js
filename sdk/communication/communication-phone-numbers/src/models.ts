@@ -68,7 +68,4 @@ export {
   MessageType,
   Recurrence,
   ContentType,
-  KnownProgramSignUpType,
-  KnownMessageType,
-  KnownContentType,
 } from "./generated/src/models/";

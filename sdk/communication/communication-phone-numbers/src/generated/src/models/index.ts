@@ -384,103 +384,6 @@ export interface PhoneNumbersReleasePhoneNumberHeaders {
   releaseId?: string;
 }
 
-/** Known values of {@link ProgramSignUpType} that the service accepts. */
-export const enum KnownProgramSignUpType {
-  Website = "website",
-  PointOfSale = "pointOfSale",
-  Sms = "sms"
-}
-
-/**
- * Defines values for ProgramSignUpType. \
- * {@link KnownProgramSignUpType} can be used interchangeably with ProgramSignUpType,
- *  this enum contains the known values that the service supports.
- * ### Know values supported by the service
- * **website** \
- * **pointOfSale** \
- * **sms**
- */
-export type ProgramSignUpType = string;
-
-/** Known values of {@link MessageType} that the service accepts. */
-export const enum KnownMessageType {
-  Sms = "sms",
-  Mms = "mms"
-}
-
-/**
- * Defines values for MessageType. \
- * {@link KnownMessageType} can be used interchangeably with MessageType,
- *  this enum contains the known values that the service supports.
- * ### Know values supported by the service
- * **sms** \
- * **mms**
- */
-export type MessageType = string;
-
-/** Known values of {@link ContentType} that the service accepts. */
-export const enum KnownContentType {
-  RingTones = "ringTones",
-  SmsChat = "smsChat",
-  Video = "video",
-  LoyaltyProgramPointsPrizes = "loyaltyProgramPointsPrizes",
-  Gifting = "gifting",
-  InApplicationBilling = "inApplicationBilling",
-  TextToScreen = "textToScreen",
-  Games = "games",
-  AudioChat = "audioChat",
-  MmsPictures = "mmsPictures",
-  SweepstakesContestAuction = "sweepstakesContestAuction",
-  FinancialBanking = "financialBanking",
-  PremiumWap = "premiumWap",
-  QueryService = "queryService",
-  WallpaperScreensaver = "wallpaperScreensaver",
-  Voting = "voting",
-  Application = "application",
-  MobileGivingDonations = "mobileGivingDonations",
-  Coupons = "coupons",
-  LoyaltyProgram = "loyaltyProgram",
-  NoPointsPrizes = "noPointsPrizes",
-  InformationalAlerts = "informationalAlerts",
-  MicroBilling = "microBilling",
-  Trivia = "trivia",
-  EntertainmentAlerts = "entertainmentAlerts",
-  Other = "other"
-}
-
-/**
- * Defines values for ContentType. \
- * {@link KnownContentType} can be used interchangeably with ContentType,
- *  this enum contains the known values that the service supports.
- * ### Know values supported by the service
- * **ringTones** \
- * **smsChat** \
- * **video** \
- * **loyaltyProgramPointsPrizes** \
- * **gifting** \
- * **inApplicationBilling** \
- * **textToScreen** \
- * **games** \
- * **audioChat** \
- * **mmsPictures** \
- * **sweepstakesContestAuction** \
- * **financialBanking** \
- * **premiumWap** \
- * **queryService** \
- * **wallpaperScreensaver** \
- * **voting** \
- * **application** \
- * **mobileGivingDonations** \
- * **coupons** \
- * **loyaltyProgram** \
- * **noPointsPrizes** \
- * **informationalAlerts** \
- * **microBilling** \
- * **trivia** \
- * **entertainmentAlerts** \
- * **other**
- */
-export type ContentType = string;
 /** Defines values for PhoneNumberType. */
 export type PhoneNumberType = "geographic" | "tollFree";
 /** Defines values for PhoneNumberAssignmentType. */
@@ -515,8 +418,40 @@ export type ProgramBriefStatus =
   | "updateProgramBrief"
   | "draft"
   | "denied";
+/** Defines values for ProgramSignUpType. */
+export type ProgramSignUpType = "website" | "pointOfSale" | "sms";
+/** Defines values for MessageType. */
+export type MessageType = "sms" | "mms";
 /** Defines values for Recurrence. */
 export type Recurrence = "subscription" | "transaction";
+/** Defines values for ContentType. */
+export type ContentType =
+  | "ringTones"
+  | "smsChat"
+  | "video"
+  | "loyaltyProgramPointsPrizes"
+  | "gifting"
+  | "inApplicationBilling"
+  | "textToScreen"
+  | "games"
+  | "audioChat"
+  | "mmsPictures"
+  | "sweepstakesContestAuction"
+  | "financialBanking"
+  | "premiumWap"
+  | "queryService"
+  | "wallpaperScreensaver"
+  | "voting"
+  | "application"
+  | "mobileGivingDonations"
+  | "coupons"
+  | "loyaltyProgram"
+  | "noPointsPrizes"
+  | "informationalAlerts"
+  | "microBilling"
+  | "trivia"
+  | "entertainmentAlerts"
+  | "other";
 
 /** Optional parameters. */
 export interface PhoneNumbersSearchAvailablePhoneNumbersOptionalParams

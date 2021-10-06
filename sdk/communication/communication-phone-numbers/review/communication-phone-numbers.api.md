@@ -50,7 +50,7 @@ export interface ContactInformation {
 }
 
 // @public
-export type ContentType = string;
+export type ContentType = "ringTones" | "smsChat" | "video" | "loyaltyProgramPointsPrizes" | "gifting" | "inApplicationBilling" | "textToScreen" | "games" | "audioChat" | "mmsPictures" | "sweepstakesContestAuction" | "financialBanking" | "premiumWap" | "queryService" | "wallpaperScreensaver" | "voting" | "application" | "mobileGivingDonations" | "coupons" | "loyaltyProgram" | "noPointsPrizes" | "informationalAlerts" | "microBilling" | "trivia" | "entertainmentAlerts" | "other";
 
 // @public
 export interface CustomerCareInformation {
@@ -60,80 +60,6 @@ export interface CustomerCareInformation {
 
 // @public
 export type GetPurchasedPhoneNumberOptions = OperationOptions;
-
-// @public
-export const enum KnownContentType {
-    // (undocumented)
-    Application = "application",
-    // (undocumented)
-    AudioChat = "audioChat",
-    // (undocumented)
-    Coupons = "coupons",
-    // (undocumented)
-    EntertainmentAlerts = "entertainmentAlerts",
-    // (undocumented)
-    FinancialBanking = "financialBanking",
-    // (undocumented)
-    Games = "games",
-    // (undocumented)
-    Gifting = "gifting",
-    // (undocumented)
-    InApplicationBilling = "inApplicationBilling",
-    // (undocumented)
-    InformationalAlerts = "informationalAlerts",
-    // (undocumented)
-    LoyaltyProgram = "loyaltyProgram",
-    // (undocumented)
-    LoyaltyProgramPointsPrizes = "loyaltyProgramPointsPrizes",
-    // (undocumented)
-    MicroBilling = "microBilling",
-    // (undocumented)
-    MmsPictures = "mmsPictures",
-    // (undocumented)
-    MobileGivingDonations = "mobileGivingDonations",
-    // (undocumented)
-    NoPointsPrizes = "noPointsPrizes",
-    // (undocumented)
-    Other = "other",
-    // (undocumented)
-    PremiumWap = "premiumWap",
-    // (undocumented)
-    QueryService = "queryService",
-    // (undocumented)
-    RingTones = "ringTones",
-    // (undocumented)
-    SmsChat = "smsChat",
-    // (undocumented)
-    SweepstakesContestAuction = "sweepstakesContestAuction",
-    // (undocumented)
-    TextToScreen = "textToScreen",
-    // (undocumented)
-    Trivia = "trivia",
-    // (undocumented)
-    Video = "video",
-    // (undocumented)
-    Voting = "voting",
-    // (undocumented)
-    WallpaperScreensaver = "wallpaperScreensaver"
-}
-
-// @public
-export const enum KnownMessageType {
-    // (undocumented)
-    Mms = "mms",
-    // (undocumented)
-    Sms = "sms"
-}
-
-// @public
-export const enum KnownProgramSignUpType {
-    // (undocumented)
-    PointOfSale = "pointOfSale",
-    // (undocumented)
-    Sms = "sms",
-    // (undocumented)
-    Website = "website"
-}
 
 // @public
 export interface ListPurchasedPhoneNumbersOptions extends OperationOptions {
@@ -157,7 +83,7 @@ export interface MessageDetails {
 }
 
 // @public
-export type MessageType = string;
+export type MessageType = "sms" | "mms";
 
 // @public
 export interface Note {
@@ -259,7 +185,7 @@ export interface ProgramDetails {
 }
 
 // @public
-export type ProgramSignUpType = string;
+export type ProgramSignUpType = "website" | "pointOfSale" | "sms";
 
 // @public
 export interface PurchasedPhoneNumber {

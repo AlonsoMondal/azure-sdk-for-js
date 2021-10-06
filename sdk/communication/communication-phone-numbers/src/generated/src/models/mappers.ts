@@ -724,7 +724,8 @@ export const ProgramDetails: coreHttp.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: ["website", "pointOfSale", "sms"]
             }
           }
         }
@@ -857,7 +858,8 @@ export const MessageDetails: coreHttp.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: ["sms", "mms"]
             }
           }
         }
@@ -875,7 +877,35 @@ export const MessageDetails: coreHttp.CompositeMapper = {
           name: "Sequence",
           element: {
             type: {
-              name: "String"
+              name: "Enum",
+              allowedValues: [
+                "ringTones",
+                "smsChat",
+                "video",
+                "loyaltyProgramPointsPrizes",
+                "gifting",
+                "inApplicationBilling",
+                "textToScreen",
+                "games",
+                "audioChat",
+                "mmsPictures",
+                "sweepstakesContestAuction",
+                "financialBanking",
+                "premiumWap",
+                "queryService",
+                "wallpaperScreensaver",
+                "voting",
+                "application",
+                "mobileGivingDonations",
+                "coupons",
+                "loyaltyProgram",
+                "noPointsPrizes",
+                "informationalAlerts",
+                "microBilling",
+                "trivia",
+                "entertainmentAlerts",
+                "other"
+              ]
             }
           }
         }
