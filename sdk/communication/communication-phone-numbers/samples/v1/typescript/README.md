@@ -76,10 +76,10 @@ npx cross-env COMMUNICATION_SAMPLES_CONNECTION_STRING="<communication samples co
 
 Take a look at our [API Documentation][apiref] for more information about the APIs that are available in the clients.
 
-[createandsubmitprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/createAndSubmitProgramBrief.ts
-[getallprogrambriefsanddelete]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllProgramBriefsAndDelete.ts
-[getallshortcodes]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllShortCodes.ts
-[getandupdateprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAndUpdateProgramBrief.ts
+[createandsubmitprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/shortcodes-review/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/createAndSubmitProgramBrief.ts
+[getallprogrambriefsanddelete]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/shortcodes-review/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllProgramBriefsAndDelete.ts
+[getallshortcodes]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/shortcodes-review/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllShortCodes.ts
+[getandupdateprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/shortcodes-review/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAndUpdateProgramBrief.ts
 [getpurchasedphonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getPurchasedPhoneNumber.ts
 [getpurchasedphonenumbers]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getPurchasedPhoneNumbers.ts
 [purchasephonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/purchasePhoneNumber.ts
