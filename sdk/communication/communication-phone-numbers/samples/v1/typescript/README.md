@@ -19,6 +19,10 @@ These sample programs show how to use the TypeScript client libraries for Azure 
 | [purchasePhoneNumber.ts][purchasephonenumber]                     | Search for a toll-free phone number then purchase it. |
 | [releasePhoneNumber.ts][releasephonenumber]                       | Release a purchased phone number.                     |
 | [updatePhoneNumberCapabilities.ts][updatephonenumbercapabilities] | Update the capabilities of a purchased phone number.  |
+| [createAndSubmitProgramBrief.ts][createandsubmitprogrambrief]     | Create and submit a program brief.                    |
+| [getAllProgramBriefsAndDelete.ts][getallprogrambriefsanddelete]   | Get all program briefs and delete drafts.             |
+| [getAllShortCodes.ts][getallshortcodes]                           | Get all short codes for a resource.                   |
+| [getAndUpdateProgramBrief.ts][getandupdateprogrambrief]           | Get a single program brief and update it.             |
 
 ## Prerequisites
 
@@ -77,6 +81,10 @@ Take a look at our [API Documentation][apiref] for more information about the AP
 [purchasephonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/purchasePhoneNumber.ts
 [releasephonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/releasePhoneNumber.ts
 [updatephonenumbercapabilities]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/updatePhoneNumberCapabilities.ts
+[createandsubmitprogrambrief]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/createAndSubmitProgramBrief.ts
+[getallprogrambriefsanddelete]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllProgramBriefsAndDelete.ts
+[getallshortcodes]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAllShortCodes.ts
+[getandupdateprogrambrief]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/typescript/src/getAndUpdateProgramBrief.ts
 [apiref]: https://docs.microsoft.com/javascript/api/@azure/communication-phone-numbers
 [freesub]: https://azure.microsoft.com/free/
 [createinstance_azurecommunicationservicesaccount]: https://docs.microsoft.com/azure/communication-services/quickstarts/create-communication-resource

@@ -26,18 +26,19 @@ export async function main() {
   const client = new ShortCodesClient(connectionString);
 
   // get a program briefs for a resource
-  const programBriefId = process.env.ProgramBriefId || "<program brief Id>";
+  const programBriefId = process.env.PROGRAM_BRIEF_TO_GET || "<program brief Id>";
   var programBrief = await client.getUSProgramBrief(programBriefId);
+  console.log(`Program brief with Id ${programBrief.id} has status ${programBrief.status} which was last updated ${programBrief.statusUpdatedDate}`);
 
-  // add updated info to program brief
-  if (programBrief.programDetails) {
-    programBrief.programDetails.privacyPolicyUrl = "https://contoso.com/updated-privacy";
-    programBrief.programDetails.termsOfServiceUrl = "https://contoso.com/updated-terms-of-service";
-  }
-  
   // update the program brief
   var updateRequest: ShortCodesUpsertUSProgramBriefOptionalParams = {
-      body: programBrief
+      body: {
+          id: programBriefId,
+          programDetails: {
+              privacyPolicyUrl: "https://contoso.com/updated-privacy",
+              termsOfServiceUrl: "https://contoso.com/updated-terms-of-service"
+          }
+      }
   };
   var upsertResponse = await client.upsertUSProgramBrief(programBriefId, updateRequest);
   if (upsertResponse._response.status == 200) {
