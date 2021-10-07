@@ -12,8 +12,6 @@ import {
   PipelineOptions,
   InternalPipelineOptions,
   createPipelineFromOptions,
-  RestResponse,
-  OperationOptions
 } from "@azure/core-http";
 import { PollerLike, PollOperationState } from "@azure/core-lro";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
@@ -21,14 +19,10 @@ import { SpanStatusCode } from "@azure/core-tracing";
 import { logger, createSpan, SDK_VERSION } from "./utils";
 import { PhoneNumbersClient as PhoneNumbersGeneratedClient } from "./generated/src";
 import { PhoneNumbers as GeneratedClient } from "./generated/src/operations";
-import { ShortCodes as ShortCodesGeneratedClient } from "./generated/src/operations";
 import {
   PurchasedPhoneNumber,
   PhoneNumberCapabilitiesRequest,
   PhoneNumberSearchResult,
-  ShortCode,
-  ShortCodesUpsertUSProgramBriefOptionalParams,
-  USProgramBrief
 } from "./generated/src/models/";
 import {
   GetPurchasedPhoneNumberOptions,
@@ -36,7 +30,6 @@ import {
   SearchAvailablePhoneNumbersRequest,
   PurchasePhoneNumbersResult,
   ReleasePhoneNumberResult,
-  ListShortCodesOptions,
 } from "./models";
 import {
   BeginPurchasePhoneNumbersOptions,
@@ -61,11 +54,6 @@ export class PhoneNumbersClient {
    * A reference to the auto-generated PhoneNumber HTTP client.
    */
   private readonly client: GeneratedClient;
-
-  /**
-   * A reference to the auto-generated ShortCodes HTTP client.
-   */
-  private readonly shortCodesClient: ShortCodesGeneratedClient;
 
   /**
    * Initializes a new instance of the PhoneNumberAdministrationClient class using a connection string.
@@ -125,7 +113,6 @@ export class PhoneNumbersClient {
     const authPolicy = createCommunicationAuthPolicy(credential);
     const pipeline = createPipelineFromOptions(internalPipelineOptions, authPolicy);
     this.client = new PhoneNumbersGeneratedClient(url, pipeline).phoneNumbers;
-    this.shortCodesClient = new PhoneNumbersGeneratedClient(url, pipeline).shortCodes;
   }
 
   /**
@@ -148,7 +135,7 @@ export class PhoneNumbersClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        // message: e.message
       });
       throw e;
     } finally {
@@ -215,7 +202,7 @@ export class PhoneNumbersClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        // message: e.message
       });
       throw e;
     } finally {
@@ -269,7 +256,7 @@ export class PhoneNumbersClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        // message: e.message
       });
       throw e;
     } finally {
@@ -314,7 +301,7 @@ export class PhoneNumbersClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        // message: e.message
       });
       throw e;
     } finally {
@@ -362,165 +349,11 @@ export class PhoneNumbersClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        // message: e.message
       });
       throw e;
     } finally {
       span.end();
     }
-  }
-
-  /**
-   * Iterates the purchased Short codes.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * for await (const shortcode of client.listShortCodes()) {
-   *   console.log("phone number: ", shortcodes.number);
-   * }
-   * ```
-   * List all purchased Short Codes.
-   * @param options 
-   * @returns 
-   */
-  public listShortCodes(
-    options: ListShortCodesOptions = {}
-  ): PagedAsyncIterableIterator<ShortCode> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-listShortCodes",
-      options
-    );
-    const iter = this.shortCodesClient.listShortCodes(updatedOptions);
-    span.end();
-    return iter;
-  }
-
-  /**
-   * Creates or updates a Program Brief.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * const programbrief = client.upsertUSProgramBrief();
-   * console.log(programbrief);
-   * ```
-   * @param programBriefId 
-   * @param options 
-   * @returns 
-   */
-  public async upsertUSProgramBrief(
-    programBriefId: string,
-    options: ShortCodesUpsertUSProgramBriefOptionalParams = {}
-  ): Promise<RestResponse> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-upsertUSProgramBrief",
-      options
-    );
-    const promise = await this.shortCodesClient.upsertUSProgramBrief(programBriefId, updatedOptions);
-    span.end();
-    return promise;
-  }
-
-  /**
-   * Deletes a Program Brief.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * const response of client.deleteUSProgramBrief();
-   * console.log(response);
-   * ```
-   * 
-   * @param programBriefId 
-   * @param options 
-   * @returns 
-   */
-  public async deleteUSProgramBrief(
-    programBriefId: string,
-    options: OperationOptions
-  ): Promise<RestResponse> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-deleteUSProgramBrief",
-      options
-    );
-    const promise = await this.shortCodesClient.deleteUSProgramBrief(programBriefId, updatedOptions);
-    span.end();
-    return promise;
-  }
-
-  /**
-   * Gets a Program Brief.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * const programbrief of client.getUSProgramBrief();
-   * console.log("phone number: ", shortcodes.number);
-   * ```
-   * @param programBriefId 
-   * @param options 
-   * @returns 
-   */
-  public async getUSProgramBrief(
-    programBriefId: string,
-    options: OperationOptions
-  ): Promise<RestResponse> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-getUSProgramBrief",
-      options
-    );
-    const promise = await this.shortCodesClient.getUSProgramBrief(programBriefId, updatedOptions);
-    span.end();
-    return promise;
-  }
-
-  /**
-   * Submits a Program Brief to be reviewed for a Short Code approval.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * const result = client.submitUSProgramBrief());
-   * console.log(result);
-   * ```
-   * @param programBriefId
-   * @param options 
-   * @returns 
-   */
-  public async submitUSProgramBrief(
-    programBriefId: string,
-    options: OperationOptions
-  ): Promise<RestResponse> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-submitUSProgramBrief",
-      options
-    );
-    const promise = await this.shortCodesClient.submitUSProgramBrief(programBriefId, updatedOptions);
-    span.end();
-    return promise;
-  }
-
-  /**
-   * Lists all owned Program Briefs.
-   *
-   * Example usage:
-   * ```ts
-   * let client = new PhoneNumbersClient(credentials);
-   * for await (const programbrief of client.listUSProgramBriefs()) {
-   *   console.log("phone number: ", shortcodes.number);
-   * }
-   * ```
-   * @param options 
-   * @returns 
-   */
-  public listUSProgramBriefs(): PagedAsyncIterableIterator<USProgramBrief> {
-    const { span, updatedOptions } = createSpan(
-      "ShortCodesClient-listUSProgramBriefs",
-      undefined
-    );
-    const iter = this.shortCodesClient.listUSProgramBriefs(updatedOptions)
-    span.end();
-    return iter;
   }
 }

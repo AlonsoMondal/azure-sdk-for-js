@@ -52,6 +52,79 @@ export interface ContactInformation {
 // @public
 export type ContentType = "ringTones" | "smsChat" | "video" | "loyaltyProgramPointsPrizes" | "gifting" | "inApplicationBilling" | "textToScreen" | "games" | "audioChat" | "mmsPictures" | "sweepstakesContestAuction" | "financialBanking" | "premiumWap" | "queryService" | "wallpaperScreensaver" | "voting" | "application" | "mobileGivingDonations" | "coupons" | "loyaltyProgram" | "noPointsPrizes" | "informationalAlerts" | "microBilling" | "trivia" | "entertainmentAlerts" | "other";
 
+// @public (undocumented)
+export interface CreateCompanyInformation {
+    address: string;
+    contactInformation: CreateContactInformation;
+    customerCareInformation: CreateCustomerCareInformation;
+    name: string;
+    url: string;
+}
+
+// @public (undocumented)
+export interface CreateContactInformation {
+    email: string;
+    name: string;
+    phone: string;
+}
+
+// @public (undocumented)
+export interface CreateCustomerCareInformation {
+    email: string;
+    tollFreeNumber: string;
+}
+
+// @public (undocumented)
+export interface CreateMessageDetails {
+    // (undocumented)
+    confirmationMessage: string;
+    contentTypes: ContentType[];
+    // (undocumented)
+    optInMessage: string;
+    optInReply: string;
+    recurrence: Recurrence;
+    types: MessageType[];
+    useCase?: string;
+}
+
+// @public (undocumented)
+export interface CreateProgramDetails {
+    description: string;
+    expectedDateOfService?: Date;
+    isPoliticalCampaign: boolean;
+    isVanity: boolean;
+    name: string;
+    numberType: NumberType;
+    preferredVanityNumbers?: string[];
+    privacyPolicyUrl: string;
+    signUp: string;
+    signUpTypes: ProgramSignUpType[];
+    termsOfServiceUrl: string;
+    url: string;
+}
+
+// @public (undocumented)
+export interface CreateTrafficDetails {
+    estimatedVolume: number;
+    isSpiky: boolean;
+    monthlyAverageMessagesFromUser: number;
+    monthlyAverageMessagesToUser: number;
+    spikeDetails?: string;
+}
+
+// @public
+export interface CreateUSProgramBrief {
+    // (undocumented)
+    companyInformation: CreateCompanyInformation;
+    id: string;
+    // (undocumented)
+    messageDetails: CreateMessageDetails;
+    // (undocumented)
+    programDetails: CreateProgramDetails;
+    // (undocumented)
+    trafficDetails: CreateTrafficDetails;
+}
+
 // @public
 export interface CustomerCareInformation {
     email?: string;
@@ -128,14 +201,8 @@ export class PhoneNumbersClient {
     beginReleasePhoneNumber(phoneNumber: string, options?: BeginReleasePhoneNumberOptions): Promise<PollerLike<PollOperationState<ReleasePhoneNumberResult>, ReleasePhoneNumberResult>>;
     beginSearchAvailablePhoneNumbers(search: SearchAvailablePhoneNumbersRequest, options?: BeginSearchAvailablePhoneNumbersOptions): Promise<PollerLike<PollOperationState<PhoneNumberSearchResult>, PhoneNumberSearchResult>>;
     beginUpdatePhoneNumberCapabilities(phoneNumber: string, request: PhoneNumberCapabilitiesRequest, options?: BeginUpdatePhoneNumberCapabilitiesOptions): Promise<PollerLike<PollOperationState<PurchasedPhoneNumber>, PurchasedPhoneNumber>>;
-    deleteUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
     getPurchasedPhoneNumber(phoneNumber: string, options?: GetPurchasedPhoneNumberOptions): Promise<PurchasedPhoneNumber>;
-    getUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
     listPurchasedPhoneNumbers(options?: ListPurchasedPhoneNumbersOptions): PagedAsyncIterableIterator<PurchasedPhoneNumber>;
-    listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCode>;
-    listUSProgramBriefs(): PagedAsyncIterableIterator<USProgramBrief>;
-    submitUSProgramBrief(programBriefId: string, options: OperationOptions): Promise<RestResponse>;
-    upsertUSProgramBrief(programBriefId: string, options?: ShortCodesUpsertUSProgramBriefOptionalParams): Promise<RestResponse>;
 }
 
 // @public
@@ -229,6 +296,30 @@ export interface ShortCodeCost {
     amount: number;
     billingFrequency: BillingFrequency;
     currencyCode: string;
+}
+
+// @public
+export class ShortCodesClient {
+    constructor(connectionString: string, options?: ShortCodesClientOptions);
+    constructor(url: string, credential: KeyCredential, options?: ShortCodesClientOptions);
+    constructor(url: string, credential: TokenCredential, options?: ShortCodesClientOptions);
+    createUSProgramBrief(programBriefId: string, options: ShortCodesCreateUSProgramBriefParams): Promise<RestResponse>;
+    deleteUSProgramBrief(programBriefId: string, options?: OperationOptions): Promise<RestResponse>;
+    getUSProgramBrief(programBriefId: string, options?: OperationOptions): Promise<USProgramBrief>;
+    listShortCodes(options?: ListShortCodesOptions): PagedAsyncIterableIterator<ShortCode>;
+    listUSProgramBriefs(): PagedAsyncIterableIterator<USProgramBrief>;
+    submitUSProgramBrief(programBriefId: string, options?: OperationOptions): Promise<RestResponse>;
+    upsertUSProgramBrief(programBriefId: string, options?: ShortCodesUpsertUSProgramBriefOptionalParams): Promise<RestResponse>;
+}
+
+// @public
+export interface ShortCodesClientOptions extends PipelineOptions {
+}
+
+// @public (undocumented)
+export interface ShortCodesCreateUSProgramBriefParams extends OperationOptions {
+    // (undocumented)
+    body: CreateUSProgramBrief;
 }
 
 // @public
