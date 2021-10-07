@@ -64,10 +64,10 @@ npx cross-env COMMUNICATION_SAMPLES_CONNECTION_STRING="<communication samples co
 
 Take a look at our [API Documentation][apiref] for more information about the APIs that are available in the clients.
 
-[createandsubmitprogrambrief]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/createAndSubmitProgramBrief.js
-[getallprogrambriefsanddelete]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAllProgramBriefsAndDelete.js
-[getallshortcodes]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAllShortCodes.js
-[getandupdateprogrambrief]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAndUpdateProgramBrief.js
+[createandsubmitprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/createAndSubmitProgramBrief.js
+[getallprogrambriefsanddelete]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAllProgramBriefsAndDelete.js
+[getallshortcodes]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAllShortCodes.js
+[getandupdateprogrambrief]: https://github.com/AlonsoMondal/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getAndUpdateProgramBrief.js
 [getpurchasedphonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getPurchasedPhoneNumber.js
 [getpurchasedphonenumbers]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/getPurchasedPhoneNumbers.js
 [purchasephonenumber]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/samples/v1/javascript/purchasePhoneNumber.js
