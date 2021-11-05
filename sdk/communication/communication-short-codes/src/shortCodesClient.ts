@@ -9,11 +9,10 @@ import {
 } from "@azure/communication-common";
 import { isTokenCredential, KeyCredential, TokenCredential } from "@azure/core-auth";
 import {
-  PipelineOptions,
-  InternalPipelineOptions,
-  createPipelineFromOptions,
+  CommonClientOptions,
+  InternalClientPipelineOptions,
   RestResponse
-} from "@azure/core-http";
+} from "@azure/core-client";
 import { PagedAsyncIterableIterator } from "@azure/core-paging";
 import { logger, createSpan, SDK_VERSION } from "./utils";
 import { ShortCodesClient as ShortCodesGeneratedClient } from "./generated/src";
@@ -35,7 +34,7 @@ import {
 /**
  * Client options used to configure the ShortCodesClient API requests.
  */
-export interface ShortCodesClientOptions extends PipelineOptions {}
+export interface ShortCodesClientOptions extends CommonClientOptions {}
 
 const isShortCodesClientOptions = (options: any): options is ShortCodesClientOptions =>
   options && !isKeyCredential(options) && !isTokenCredential(options);
@@ -81,7 +80,7 @@ export class ShortCodesClient {
       options.userAgentOptions.userAgentPrefix = libInfo;
     }
 
-    const internalPipelineOptions: InternalPipelineOptions = {
+    const internalPipelineOptions: InternalClientPipelineOptions = {
       ...options,
       ...{
         loggingOptions: {
