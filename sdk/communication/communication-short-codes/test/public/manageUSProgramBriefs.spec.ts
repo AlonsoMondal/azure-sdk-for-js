@@ -12,21 +12,21 @@ import {
   getTestUSProgramBrief
 } from "./utils/testUSProgramBrief";
 
-describe(`ShortCodesClient - creates, gets, updates, lists, and deletes US Program Brief`, function() {
+describe(`ShortCodesClient - creates, gets, updates, lists, and deletes US Program Brief`, function () {
   let recorder: Recorder;
   let client: ShortCodesClient;
 
-  beforeEach(function(this: Context) {
+  beforeEach(function (this: Context) {
     ({ client, recorder } = createRecordedClient(this));
   });
 
-  afterEach(async function(this: Context) {
+  afterEach(async function (this: Context) {
     if (!this.currentTest?.isPending()) {
       await recorder.stop();
     }
   });
 
-  it("can create, get, update, list, and delete a US Program Brief", async function() {
+  it("can create, get, update, list, and delete a US Program Brief", async function () {
     const uspb = getTestUSProgramBrief();
     const createRequest: ShortCodesUpsertUSProgramBriefOptionalParams = {
       body: uspb
@@ -58,7 +58,7 @@ describe(`ShortCodesClient - creates, gets, updates, lists, and deletes US Progr
     assert.isOk(submitResult, "Failed to create program brief");
     assert.equal(
       uspb.id,
-      submitResult._response.parsedBody["id"],
+      submitResult.id,
       "Program brief creation returned the wrong Id"
     );
 
@@ -77,7 +77,7 @@ describe(`ShortCodesClient - creates, gets, updates, lists, and deletes US Progr
     assert.isOk(updateResult, "Update program brief failed");
     assert.equal(
       uspb.id,
-      updateResult._response.parsedBody["id"],
+      updateResult.id,
       "Update program brief returned the wrong Id"
     );
 
