@@ -213,7 +213,6 @@ export interface USProgramBrief {
     trafficDetails?: TrafficDetails;
 }
 
-
 // (No @packageDocumentation comment for this package)
 
 ```
