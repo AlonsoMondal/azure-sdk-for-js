@@ -26,7 +26,9 @@ export async function main() {
   // construct send request
   const sendRequest: SmsSendRequest = {
     from: process.env.FROM_PHONE_NUMBER || process.env.AZURE_PHONE_NUMBER || "<from-phone-number>",
-    to: process.env.TO_PHONE_NUMBERS?.split(",") || [process.env.AZURE_PHONE_NUMBER!] || [
+    to: (process.env.TO_PHONE_NUMBERS &&
+      process.env.TO_PHONE_NUMBERS.split &&
+      process.env.TO_PHONE_NUMBERS.split(",")) || [process.env.AZURE_PHONE_NUMBER!] || [
         "<to-phone-number-1>",
         "<to-phone-number-2>"
       ],
