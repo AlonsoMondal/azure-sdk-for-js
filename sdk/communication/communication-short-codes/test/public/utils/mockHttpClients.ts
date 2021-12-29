@@ -15,7 +15,7 @@ export const createMockHttpClient = <T = Record<string, unknown>>(
         headers: request.headers,
         bodyAsText: JSON.stringify(parsedBody)
       };
-    }
+    },
   };
 };
 
