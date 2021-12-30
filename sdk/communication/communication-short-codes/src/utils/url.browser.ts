@@ -1,8 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
-import { URL, URLSearchParams } from "./url"
-
 const url = URL;
 const urlSearchParams = URLSearchParams;
 

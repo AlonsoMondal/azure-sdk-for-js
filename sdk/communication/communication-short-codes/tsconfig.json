@@ -5,7 +5,9 @@
     "declarationDir": "./types",
     "paths": {
       "@azure-tools/communication-short-codes": ["./src/index"]
-    }
+    },
+    "lib": ["dom"]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "samples-dev/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "samples-dev/**/*.ts"],
+  "exclude": ["src/utils/shims.d.ts"]
 }

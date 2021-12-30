@@ -11,7 +11,7 @@ import { ShortCodesClient as ShortCodesGeneratedClient } from "./generated/src";
 import {
   ShortCode,
   ShortCodesUpsertUSProgramBriefOptionalParams,
-  USProgramBrief
+  USProgramBrief,
 } from "./generated/src/models/";
 import { SpanStatusCode } from "@azure/core-tracing";
 import {
@@ -19,11 +19,11 @@ import {
   GetUSProgramBriefOptions,
   ListShortCodesOptions,
   ListUSProgramBriefsOptions,
-  SubmitUSProgramBriefOptions
+  SubmitUSProgramBriefOptions,
 } from "./models";
 import {
   createCommunicationAccessKeyCredentialPolicy,
-  createCommunicationAuthPolicy
+  createCommunicationAuthPolicy,
 } from "./utils/communicationAccessKeyCredentialPolicy";
 
 /**
@@ -79,9 +79,9 @@ export class ShortCodesClient {
       ...options,
       ...{
         loggingOptions: {
-          logger: logger.info
-        }
-      }
+          logger: logger.info,
+        },
+      },
     };
 
     this.client = new ShortCodesGeneratedClient(url, internalPipelineOptions);
@@ -102,7 +102,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
@@ -123,7 +123,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
@@ -144,7 +144,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
@@ -165,7 +165,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
@@ -182,7 +182,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
@@ -203,7 +203,7 @@ export class ShortCodesClient {
     } catch (e) {
       span.setStatus({
         code: SpanStatusCode.ERROR,
-        message: e.message
+        message: e.message,
       });
       throw e;
     } finally {
