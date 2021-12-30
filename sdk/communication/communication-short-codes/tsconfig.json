@@ -8,6 +8,5 @@
     },
     "lib": ["dom"]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "samples-dev/**/*.ts"],
-  "exclude": ["src/utils/shims.d.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "samples-dev/**/*.ts"]
 }
