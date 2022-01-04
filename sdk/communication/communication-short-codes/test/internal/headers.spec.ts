@@ -18,7 +18,7 @@ const isNode =
   !!process.versions &&
   !!process.versions.node;
 
-describe("PhoneNumbersClient - headers", function () {
+describe("ShortCodesClient - headers", function () {
   const endpoint = "https://contoso.spool.azure.local";
   const accessKey = "banana";
   let client = new ShortCodesClient(endpoint, new AzureKeyCredential(accessKey), {
