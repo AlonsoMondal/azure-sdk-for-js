@@ -2,9 +2,10 @@
 
 ## 1.0.0-beta.2 (2022-02-08)
 ### Features Added
-- Updated HTTP client to ``core-rest-pipeline``
+- Upgraded the package to use the latest version of Azure Core, bringing several improvements to the package's HTTP pipeline architecture.
 ### Breaking Changes
-- The new core library no longer exposes the _response property on the operation return types. However, in the operation options, it can take a callback (onResponse) to access the HTTP response. See https://github.com/Azure/autorest.typescript/wiki/%60core-http%60-dependency-migration-to-%60core-client%60-%60core-rest-pipeline%60#change-to-the-_response-property
+- Altered the client constructor options to inherit from the Azure Core v2 ``CommonClientOptions`` instead of the previous ``PipelineOptions``.
+- The new core library no longer exposes the ``_response`` property on the operation return types. However, in the operation options, it can take a callback (``onResponse``) to access the HTTP response. See https://github.com/Azure/autorest.typescript/wiki/%60core-http%60-dependency-migration-to-%60core-client%60-%60core-rest-pipeline%60#change-to-the-_response-property
 
 ## 1.0.0-beta.1 (2021-11-05)
 
