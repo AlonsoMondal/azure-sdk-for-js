@@ -930,6 +930,17 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /@azure/mixed-reality-authentication/1.0.0-beta.1:
+    resolution: {integrity: sha512-MpRV6fygoXOU8fqNmk5tDUt4L/JbE5rQQ5EhjzXO7pK4OmuV0fmxwgvAlBQHAYCLUhS7nsZv5o6oj7P7Qwd3oA==}
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@azure/core-auth': 1.3.2
+      '@azure/core-http': 2.2.2
+      '@azure/core-tracing': 1.0.0-preview.13
+      '@azure/logger': 1.0.3
+      tslib: 2.3.1
+    dev: false
+
   /@azure/monitor-opentelemetry-exporter/1.0.0-beta.4:
     resolution: {integrity: sha512-Y3HGIhepNpk83XzxbOFBhXNVHI+ntXaPKJmqpqcVhAkN3x3LMKzDRg9B8CUDLkaeYAMV60lievKz052EFHkgbw==}
     engines: {node: '>=12.0.0'}
@@ -13058,7 +13069,7 @@ packages:
     dev: false
 
   file:projects/mixed-reality-authentication.tgz:
-    resolution: {integrity: sha512-/957lA9+0kU7h+wqlphxrYOHnLSJBgbv3+Dn0HvxGS2mLlF2KPOG9ij4ryTjgmw4GuKgAt/J2QE9lGrw3nqsog==, tarball: file:projects/mixed-reality-authentication.tgz}
+    resolution: {integrity: sha512-Hy8/9a4kQzsitHzg5qsdz9vPpe9y+32R/WyUSNceeIaHFLVCrgbffVukC0fYtnfz7p6GSb+s0zXd3d/P+9W0ew==, tarball: file:projects/mixed-reality-authentication.tgz}
     name: '@rush-temp/mixed-reality-authentication'
     version: 0.0.0
     dependencies:
@@ -13105,12 +13116,13 @@ packages:
     dev: false
 
   file:projects/mixed-reality-remote-rendering.tgz:
-    resolution: {integrity: sha512-AxE7atwTTZPNNrszrn4Mb8QXWTuDR6+RztTE5poid/Qzua6tbL6ypRJFWTxIJhIe9wxndMQohtDCq1muNNehTA==, tarball: file:projects/mixed-reality-remote-rendering.tgz}
+    resolution: {integrity: sha512-hNcaPrF32vXLQPXiiq18w1YIubvGFUSVLYev1qB5zfymANd614dSqEXA08Phgoa1hEGXpBkmI0CsMHhIpDIogg==, tarball: file:projects/mixed-reality-remote-rendering.tgz}
     name: '@rush-temp/mixed-reality-remote-rendering'
     version: 0.0.0
     dependencies:
       '@azure-tools/test-recorder': 1.0.2
       '@azure/core-tracing': 1.0.0-preview.13
+      '@azure/mixed-reality-authentication': 1.0.0-beta.1
       '@microsoft/api-extractor': 7.19.2
       '@types/chai': 4.3.0
       '@types/chai-as-promised': 7.1.4
