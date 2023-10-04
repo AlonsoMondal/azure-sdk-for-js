@@ -5,10 +5,8 @@
   "dependencies": {
     "@typespec/compiler": "latest",
     "@typespec/rest": "latest",
-    "@typespec/openapi3": "latest"
-  },
-  "private": true,
-  "dependencies": {
+    "@typespec/openapi3": "latest",
     "@azure-tools/typespec-ts": "latest"
-  }
+  },
+  "private": true
 }
