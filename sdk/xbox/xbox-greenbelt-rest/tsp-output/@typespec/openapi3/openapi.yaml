@@ -1,0 +1,1738 @@
+openapi: 3.0.0
+info:
+  title: Xbox.Greenbelt
+  version: v1
+  description: OAuth2 authentication.
+tags: []
+paths:
+  /api/Accounts:
+    get:
+      operationId: getAccounts
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountResponse'
+  /api/Accounts/{accountId}:
+    get:
+      operationId: getAccount
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+    put:
+      operationId: updateAccount
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accessList
+                - name
+              properties:
+                accessList:
+                  type: array
+                  items:
+                    type: string
+                name:
+                  type: string
+  /api/accounts/{accountId}/Builds:
+    get:
+      operationId: listBuild
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuildResponse'
+    post:
+      operationId: createBuild
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - buildConnector
+              properties:
+                name:
+                  type: string
+                aumIds:
+                  type: array
+                  items:
+                    type: string
+                buildConnector:
+                  $ref: '#/components/schemas/FileConnectorReferenceRequest'
+  /api/accounts/{accountId}/Builds/{buildId}:
+    get:
+      operationId: getBuild
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildResponse'
+    delete:
+      operationId: deleteBuild
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+    put:
+      operationId: updateBuild
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: buildId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - buildConnector
+              properties:
+                name:
+                  type: string
+                aumIds:
+                  type: array
+                  items:
+                    type: string
+                buildConnector:
+                  $ref: '#/components/schemas/FileConnectorReferenceRequest'
+  /api/accounts/{accountId}/Connectors:
+    get:
+      operationId: listConnectors
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorResponse'
+    post:
+      operationId: createConnector
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - connectorType
+                - targetUri
+                - uses
+              properties:
+                name:
+                  type: string
+                connectorType:
+                  $ref: '#/components/schemas/ConnectorType'
+                targetUri:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                uses:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectorUse'
+  /api/accounts/{accountId}/Connectors/query:
+    post:
+      operationId: queryConnectors
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConnectorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connectorTypes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectorType'
+                connectorUses:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectorUse'
+  /api/accounts/{accountId}/Connectors/{connectorId}:
+    get:
+      operationId: getConnectors
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: connectorId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorResponse'
+    delete:
+      operationId: deleteConnector
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: connectorId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+    put:
+      operationId: updateConnector
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: connectorId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - targetUri
+                - uses
+              properties:
+                name:
+                  type: string
+                targetUri:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                uses:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ConnectorUse'
+  /api/accounts/{accountId}/Players:
+    get:
+      operationId: getPlayers
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerResponse'
+    post:
+      operationId: createPlayers
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emailAddress
+                - gamertag
+                - password
+              properties:
+                emailAddress:
+                  type: string
+                gamertag:
+                  type: string
+                password:
+                  type: string
+  /api/accounts/{accountId}/Players/{id}:
+    get:
+      operationId: getPlayer
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+  /api/accounts/{accountId}/Players/{playerId}:
+    delete:
+      operationId: deletePlayer
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+    put:
+      operationId: updatePlayer
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: playerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - emailAddress
+                - gamertag
+                - password
+              properties:
+                emailAddress:
+                  type: string
+                gamertag:
+                  type: string
+                password:
+                  type: string
+  /api/accounts/{accountId}/Pools:
+    get:
+      operationId: listPools
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PoolResponse'
+    post:
+      operationId: createPool
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+  /api/accounts/{accountId}/Pools/{poolId}:
+    get:
+      operationId: getPool
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolResponse'
+    put:
+      operationId: updatePool
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+    delete:
+      operationId: deletePool
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+  /api/accounts/{accountId}/Sessions:
+    get:
+      operationId: listSessions
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionResponse'
+    post:
+      operationId: createSession
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - maxRuntimeMinutes
+                - name
+                - poolId
+                - requestedDeviceCount
+                - sessionType
+                - build
+                - artifactsConnector
+              properties:
+                cmdLineArgs:
+                  type: string
+                maxRuntimeMinutes:
+                  type: integer
+                  format: int64
+                name:
+                  type: string
+                playerAllowlist:
+                  type: array
+                  items:
+                    type: string
+                poolId:
+                  type: string
+                requestedDeviceCount:
+                  type: integer
+                  format: int64
+                sandboxId:
+                  type: string
+                sessionType:
+                  $ref: '#/components/schemas/SessionType'
+                build:
+                  $ref: '#/components/schemas/BuildReferenceRequest'
+                artifactsConnector:
+                  $ref: '#/components/schemas/FolderConnectorReferenceRequest'
+                startupFiles:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/LooseFileConnectorReferenceRequest'
+  /api/accounts/{accountId}/Sessions/{sessionId}:
+    get:
+      operationId: getSession
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: includeSessionLogs
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionResponse'
+    delete:
+      operationId: deleteSession
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+  /api/accounts/{accountId}/Sessions/{sessionId}/artifacts:
+    get:
+      operationId: getSessionArtifacts
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SessionArtifact'
+  /api/accounts/{accountId}/Sessions/{sessionId}/terminate:
+    put:
+      operationId: putSessionTerminate
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: string
+  /api/accounts/{accountId}/pools/{poolId}/Devices:
+    get:
+      operationId: listDevices
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceResponse'
+    post:
+      operationId: createDevice
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - consoleId
+                - name
+              properties:
+                consoleId:
+                  type: string
+                name:
+                  type: string
+  /api/accounts/{accountId}/pools/{poolId}/Devices/{deviceId}:
+    get:
+      operationId: getDevice
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+    put:
+      operationId: updateDevice
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+    delete:
+      operationId: deleteDevice
+      parameters:
+        - name: x-ms-useragent
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - GreenbeltSDK
+        - name: accountId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: poolId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+        '204':
+          description: 'There is no content to send for this request, but the headers may
+            be useful. '
+security:
+  - OAuth2Auth:
+      - https://greenbeltdev.com/.default
+components:
+  schemas:
+    AccountResponse:
+      type: object
+      description: An account.
+      required:
+        - accessList
+        - createdBy
+        - createdDate
+        - id
+        - name
+        - tenantId
+        - updatedBy
+        - updatedDate
+      properties:
+        accessList:
+          type: array
+          items:
+            type: string
+          description: Access list.
+        createdBy:
+          type: string
+          description: Created by.
+        createdDate:
+          type: string
+          description: Created date.
+        id:
+          type: string
+          description: ID.
+        name:
+          type: string
+          description: The pool name.
+          readOnly: true
+        tenantId:
+          type: string
+          description: Tenant ID.
+        updatedBy:
+          type: string
+          description: Updated by.
+        updatedDate:
+          type: string
+          description: Updated date.
+    BuildReferenceRequest:
+      type: object
+      description: Build Reference Request
+      required:
+        - buildId
+        - aumId
+      properties:
+        buildId:
+          type: string
+          description: BuildId
+        aumId:
+          type: string
+          description: aumId
+    BuildReferenceResponse:
+      type: object
+      description: Build Reference Response
+      required:
+        - buildId
+        - name
+        - aumId
+        - locationUri
+      properties:
+        buildId:
+          type: string
+          description: BuildId
+        name:
+          type: string
+          description: Name
+        aumId:
+          type: string
+          description: aumId
+        locationUri:
+          type: string
+          description: Location URI
+    BuildResponse:
+      type: object
+      description: Build information.
+      required:
+        - aumIds
+        - buildConnector
+        - createdBy
+        - createdDate
+        - id
+        - name
+        - updatedBy
+        - updatedDate
+      properties:
+        aumIds:
+          type: array
+          items:
+            type: string
+        buildConnector:
+          $ref: '#/components/schemas/ConnectorReferenceResponse'
+        createdBy:
+          type: string
+          description: The user that created the build.
+        createdDate:
+          type: string
+          description: Created date.
+        id:
+          type: string
+          description: The build ID.
+          readOnly: true
+        name:
+          type: string
+          description: The name of the build.
+        updatedBy:
+          type: string
+          description: Updated by.
+        updatedDate:
+          type: string
+          description: Updated date.
+    Cloud:
+      type: string
+      description: Cloud type enum.
+      enum:
+        - Public
+        - Private
+        - Hybrid
+    ConnectorReferenceResponse:
+      type: object
+      description: Connector Reference Response
+      required:
+        - connectorId
+        - name
+        - connectorType
+        - locationUri
+      properties:
+        connectorId:
+          type: string
+          description: Connector ID
+        name:
+          type: string
+          description: Name
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+          description: Connector Type
+        locationUri:
+          type: string
+          description: Location URI
+    ConnectorResponse:
+      type: object
+      description: Connector Response
+      required:
+        - id
+        - createdBy
+        - createdDate
+        - updatedBy
+        - updatedDate
+        - name
+        - connectorType
+        - targetUri
+        - uses
+      properties:
+        id:
+          type: string
+          description: id
+        createdBy:
+          type: string
+          description: Created By
+        createdDate:
+          type: string
+          description: Created Date
+        updatedBy:
+          type: string
+          description: Updated by
+        updatedDate:
+          type: string
+          description: Updated Date
+        name:
+          type: string
+          description: Name
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+          description: Connector Type
+        targetUri:
+          type: string
+          description: Target URI
+        uses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConnectorUse'
+          description: Uses
+    ConnectorType:
+      type: string
+      description: "Provides enumerated constants that identify the type of storage
+        connector.\r
+
+        Developer Guidance: if the connector requires credentials or
+        provides for\r
+
+        a richer experience (e.g., reading the list of files in a
+        container so\r
+
+        that a list of possible choices for a file) then define a unique
+        value in\r
+
+        this enumeration; otherwise use None."
+      enum:
+        - None
+        - SMB
+        - AzureStorageContainer
+    ConnectorUse:
+      type: string
+      description: "Defines enumerated constants that specify the use for a\r
+
+        storage connector. A connector can support multiple\r
+
+        uses at the same time."
+      enum:
+        - Download
+        - Upload
+    DeviceResponse:
+      type: object
+      description: A Device.
+      required:
+        - createdDate
+        - id
+        - isCloudDevice
+        - status
+        - updatedDate
+        - uptime
+      properties:
+        createdBy:
+          type: string
+          description: Created by.
+        createdDate:
+          type: string
+          description: Created date.
+        deviceType:
+          type: string
+          description: The device type.
+        hostname:
+          type: string
+          description: The host name.
+        id:
+          type: string
+          description: The device ID.
+          readOnly: true
+        ipAddress:
+          type: string
+          description: The IP address.
+        isCloudDevice:
+          type: boolean
+        name:
+          type: string
+          description: The device name.
+        osVersion:
+          type: string
+          description: The OS version.
+        poolId:
+          type: string
+          description: The pool ID.
+        sessionId:
+          type: string
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DeviceStatus'
+          description: Status code.
+        updatedBy:
+          type: string
+          description: Updated by.
+        updatedDate:
+          type: string
+          description: Updated date.
+        uptime:
+          type: integer
+          format: int64
+          description: The up time.
+    DeviceStatus:
+      type: string
+      description: Device status enum.
+      enum:
+        - Offline
+        - Idle
+        - Active
+    FileConnectorReferenceRequest:
+      type: object
+      description: Files Connector Reference Request
+      required:
+        - connectorId
+        - locationUri
+      properties:
+        connectorId:
+          type: string
+          description: ConnectorId
+        locationUri:
+          type: string
+          description: Location URI
+    FolderConnectorReferenceRequest:
+      type: object
+      description: Folder Connector Reference Request
+      required:
+        - connectorId
+      properties:
+        connectorId:
+          type: string
+          description: ConnectorId
+        locationUri:
+          type: string
+          description: Location URI
+    LooseFileConnectorReferenceRequest:
+      type: object
+      description: Loose File Connector Reference Request
+      required:
+        - connectorId
+        - locationUri
+        - destinationUri
+      properties:
+        connectorId:
+          type: string
+          description: ConnectorId
+        locationUri:
+          type: string
+          description: Location URI
+        destinationUri:
+          type: string
+          description: Destination URI
+    LooseFileConnectorReferenceResponse:
+      type: object
+      description: Loose File Connector Reference Response
+      required:
+        - connectorId
+        - connectorType
+        - locationUri
+        - deviceLocationUri
+      properties:
+        connectorId:
+          type: string
+          description: Connector ID
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+          description: Connector Type
+        locationUri:
+          type: string
+          description: Location URI
+        deviceLocationUri:
+          type: string
+          description: Device Location URI
+    MyFlow:
+      type: object
+      required:
+        - type
+        - authorizationUrl
+        - scopes
+      properties:
+        type:
+          type: string
+          enum:
+            - implicit
+        authorizationUrl:
+          type: string
+          enum:
+            - https://login.microsoftonline.com/common/oauth2/authorize
+        scopes:
+          type: array
+          items: {}
+    PlayerResponse:
+      type: object
+      description: Player info.
+      required:
+        - id
+      properties:
+        emailAddress:
+          type: string
+          description: Email address.
+        gamertag:
+          type: string
+          description: Gamertag.
+        id:
+          type: string
+          description: Console ID.
+    PoolResponse:
+      type: object
+      description: A Pool.
+      required:
+        - allowCloudDevices
+        - createdBy
+        - createdDate
+        - id
+        - name
+        - updatedBy
+        - updatedDate
+      properties:
+        allowCloudDevices:
+          type: boolean
+        createdBy:
+          type: string
+          description: Created by.
+        createdDate:
+          type: string
+          description: Created date.
+        id:
+          type: string
+          description: The ID of the pool.
+          readOnly: true
+        name:
+          type: string
+          description: The pool name.
+          readOnly: true
+        updatedBy:
+          type: string
+          description: Updated by.
+        updatedDate:
+          type: string
+          description: Updated date.
+    SessionArtifact:
+      type: object
+      description: Session Artifact
+      required:
+        - name
+        - uri
+        - lastModifiedDate
+        - sizeInBytes
+      properties:
+        name:
+          type: string
+          description: Name
+        uri:
+          type: string
+          description: URI
+        lastModifiedDate:
+          type: string
+          description: Last Modified Date
+        sizeInBytes:
+          type: integer
+          format: int64
+          description: Size in Bytes
+    SessionLog:
+      type: object
+      description: Session log info.
+      required:
+        - consoleId
+        - timeStamp
+      properties:
+        consoleId:
+          type: string
+          description: Console ID.
+        message:
+          type: string
+          description: Message.
+        timeStamp:
+          type: string
+          description: Timestamp.
+    SessionResponse:
+      type: object
+      description: A Session.
+      required:
+        - artifactsConnector
+        - build
+        - createdDate
+        - currentStage
+        - id
+        - maxRuntimeMinutes
+        - requestedDeviceCount
+        - sessionType
+        - updatedDate
+      properties:
+        accountId:
+          type: string
+          description: Account ID.
+        allocatedDeviceIds:
+          type: array
+          items:
+            type: string
+          description: Allocated device IDs.
+        artifactsConnector:
+          $ref: '#/components/schemas/ConnectorReferenceResponse'
+        build:
+          $ref: '#/components/schemas/BuildReferenceResponse'
+        cmdLineArgs:
+          type: string
+          description: Command line args.
+        createdBy:
+          type: string
+          description: Created by.
+        createdDate:
+          type: string
+          description: Created date.
+        currentStage:
+          allOf:
+            - $ref: '#/components/schemas/SessionStage'
+          description: Current stage.
+        id:
+          type: string
+          description: The sesssion ID.
+          readOnly: true
+        maxRuntimeMinutes:
+          type: integer
+          format: int64
+          description: Max runtime minutes.
+        name:
+          type: string
+        playerAllowlist:
+          type: array
+          items:
+            type: string
+        poolId:
+          type: string
+          description: Pool ID.
+        requestedDeviceCount:
+          type: integer
+          format: int64
+        sandboxId:
+          type: string
+          description: Sandbox ID.
+        sessionLogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionLog'
+          description: Session logs.
+        sessionType:
+          allOf:
+            - $ref: '#/components/schemas/SessionType'
+          description: Session type.
+        startupFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/LooseFileConnectorReferenceResponse'
+        streamingSessionLink:
+          type: string
+        terminationRequestDate:
+          type: string
+        updatedBy:
+          type: string
+          description: Updated by.
+        updatedDate:
+          type: string
+          description: Updated date.
+    SessionStage:
+      type: string
+      description: Session stage.
+      enum:
+        - Pending
+        - WaitingForResources
+        - Configuring
+        - Deploying
+        - Active
+        - Terminating
+        - Terminated
+    SessionType:
+      type: string
+      description: Session type.
+      enum:
+        - Automated
+        - Interactive
+  securitySchemes:
+    OAuth2Auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/authorize
+          scopes:
+            https://greenbeltdev.com/.default: ''
+servers:
+  - url: https://{endpoint}
+    description: Xbox.Greenbelt Endpoint
+    variables:
+      endpoint:
+        default: ''
+        description: Endpoint URL

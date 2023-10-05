@@ -2122,7 +2122,7 @@
       "versionPolicyName": "management"
     },
     {
-      "packageName": "@azure-rest/xbox-greenbelt",
+      "packageName": "@azure-rest/xbox-greenbelt-rest",
       "projectFolder": "sdk/xbox/xbox-greenbelt-rest",
       "versionPolicyName": "client"
     }

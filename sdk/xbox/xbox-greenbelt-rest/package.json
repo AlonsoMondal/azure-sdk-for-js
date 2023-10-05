@@ -1,12 +1,14 @@
 {
-  "name": "xbox-greenbelt-rest",
+  "name": "@azure-rest/xbox-greenbelt-rest",
   "version": "0.1.0",
   "type": "module",
   "dependencies": {
     "@typespec/compiler": "latest",
     "@typespec/rest": "latest",
     "@typespec/openapi3": "latest",
-    "@azure-tools/typespec-ts": "latest"
+    "@azure-tools/typespec-ts": "latest",
+    "@typespec/http": "latest",
+    "@typespec/versioning": "latest"
   },
   "private": true
 }
