@@ -10,5 +10,9 @@
     "@typespec/http": "latest",
     "@typespec/versioning": "latest"
   },
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "npm run clean && tsc -p . && dev-tool run bundle && api-extractor run --local",
+    "pack": "npm pack 2>&1"
+  }
 }

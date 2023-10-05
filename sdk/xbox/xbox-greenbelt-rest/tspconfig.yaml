@@ -4,7 +4,7 @@ emit:
 options:
   "@azure-tools/typespec-ts":
     title: GreenbeltSDK
-    generateMetadata: true
+    generateMetadata: false
     generateTest: true
     "emitter-output-dir": "{output-dir}"
     packageDetails:
