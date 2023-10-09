@@ -6,8 +6,10 @@ OAuth2 authentication.
 
 Key links:
 
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/xbox/xbox-greenbelt-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/xbox-greenbelt)
 - [API reference documentation](https://docs.microsoft.com/javascript/api/@azure-rest/xbox-greenbelt?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/xbox/xbox-greenbelt-rest/samples)
 
 ## Getting started
 

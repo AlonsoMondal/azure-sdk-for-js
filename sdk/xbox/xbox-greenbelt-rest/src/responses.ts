@@ -10,6 +10,7 @@ import {
   SessionResponseOutput,
   PoolResponseOutput,
   PlayerResponseOutput,
+  SessionArtifactOutput,
 } from "./outputModels";
 
 /** The request has succeeded. */
